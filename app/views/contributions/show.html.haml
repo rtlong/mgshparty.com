@@ -1,0 +1,17 @@
+- title "Thank You"
+
+.centered
+  %h1 Thank you, we appreciate your contribution and your response.
+
+  %p 
+    If you need to change or review any of the information here in the future, the 
+    = link_to 'current url', business_contribution_url(@contribution.business)
+    will bring you back here. You can also go to the main 
+    = link_to 'contribute', contribute_url
+    url you first went to.
+  
+= render :partial => "businesses/display", :locals => {:business => @contribution.business}
+= render :partial => "display", :locals => {:contribution => @contribution}
+  
+%p= link_to "Forget Something?", edit_business_contribution_path(@contribution.business)
+

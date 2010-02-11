@@ -1,0 +1,22 @@
+body {
+  background-color: #000000;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 14px;
+  color: #ffffff; }
+
+a {
+  color: #ffffff; }
+  a img {
+    border: none; }
+
+form.formtastic fieldset {
+  border-color: #ffffff; }
+
+table tr th {
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #000000; }
+table tr td {
+  border-color: #ffffff; }
+table tr.business_name {
+  background-color: #553311; }

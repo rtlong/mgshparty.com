@@ -1,0 +1,76 @@
+@import formtastic_base
+@import colors
+
+!input_padding_x = 5px
+!input_padding_y = 2px
+
+form.formtastic
+  :text-align left
+  +stack-form
+  fieldset
+    :margin-top 10px
+    :border 1px solid black
+    legend
+      :font-size larger
+      :padding 0px 3px
+    ol
+      li
+        :margin-top 5px
+        li
+          :margin-top 0
+        
+        :padding-right = !input_padding_x * 2 + 2
+        &.select  
+          :padding-right 0
+        
+        input, select, textarea
+          :width 100%
+        &.radio
+          input
+            :width auto
+          legend
+            :font-size inherit
+          
+        p.inline-hints
+          :color #777
+          :font-style oblique
+          :font-size smaller
+          :margin
+            :left 15px
+            :top 0
+          
+    &.address
+      li.street
+      li.city, li.state, li.zip
+        :display inline-block
+      li.city
+        :width 50%
+      li.state
+      li.zip
+  
+    &.buttons
+      :border none
+      :text-align center
+      li
+        :float none
+        &.commit
+          input
+            :border-width 2px
+            :font-size larger
+                  
+    .inline-errors
+      :color = !primary_color
+        
+input,select,textarea
+  :font-family Trebuchet MS, Arial, sans-serif
+  :border 1px solid black
+  :padding
+    :left = !input_padding_x
+    :right = !input_padding_x
+    :top = !input_padding_y
+    :bottom = !input_padding_y
+
+select
+  :padding
+    :top = !input_padding_y - 2
+    :right 0

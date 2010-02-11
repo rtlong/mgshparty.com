@@ -1,0 +1,23 @@
+one:
+  donation_type: MyString
+  donation_value: 1
+  message: MyText
+  contact_phone: MyString
+  contact_email: MyString
+  business_id: 1
+  contact_name: MyString
+  donation_mailed: false
+  donation_will_need_pickup: false
+  donation_received: false
+
+two:
+  donation_type: MyString
+  donation_value: 1
+  message: MyText
+  contact_phone: MyString
+  contact_email: MyString
+  business_id: 1
+  contact_name: MyString
+  donation_mailed: false
+  donation_will_need_pickup: false
+  donation_received: false

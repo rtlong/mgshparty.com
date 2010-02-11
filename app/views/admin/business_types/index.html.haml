@@ -1,0 +1,13 @@
+- title "Business Types"
+
+%ul
+  - for business_type in @business_types
+    %li
+      = link_to business_type.name, admin_business_type_path(business_type)
+      %span.count (#{business_type.businesses.length > 0 ? business_type.businesses.length : 'unused'})
+
+%div
+  New type
+  - form_for [:admin, @new_business_type] do |f|
+    = f.text_field :name
+    = submit_tag "New"

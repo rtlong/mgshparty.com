@@ -1,0 +1,18 @@
+- f.inputs "Business" do
+  = f.input :name, :label => 'Name'
+  = f.input :business_type, :label => "Type", :hint => "In to which of these does your business best fit?"
+  = f.input :phone, :label => 'Phone', :hint => "ex. 763-555-2135 x123"
+
+- f.inputs "Address", :class => 'address' do
+  = f.input :street,  :label => 'Street',   :wrapper_html => { :class => 'street'}
+  = f.input :street2, :label => false,      :wrapper_html => { :class => 'street'}
+  = f.input :city,    :label => 'City',     :wrapper_html => { :class => 'city'}
+  = f.input :state,   :label => 'State',    :wrapper_html => { :class => 'state'}, :as => :select, :collection => Addressing::STATES.values.uniq.sort
+  = f.input :zip,     :label => 'Zip Code', :wrapper_html => { :class => 'zip'},    :input_html => { :size => 10 }
+
+- f.inputs "Contact" do
+  %p Please tell us how to contact you.
+  = f.input :contact_name, :label => 'Name'
+  = f.input :contact_department, :label => 'Department', :hint => 'If this information is neccessary in order for a mailing to get directly to you, please include your department'
+  = f.input :contact_phone, :label => 'Phone', :hint => "ex. 763-555-2135 x123"
+  = f.input :contact_email, :label => 'Email Address'

@@ -1,0 +1,22 @@
+!!! Strict
+%html{html_attrs}
+  
+  %head
+    %title #{h(yield(:title) || "Untitled")} - Admin - MGSHParty.com
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    = javascript_include_tag :all
+    = stylesheet_link_tag 'formtastic', 'application', 'admin'
+    = yield(:head)
+  
+  %body
+    - if logged_in?
+      #userinfo
+        Logged in as #{current_user.username}
+        = link_to "Log Out", admin_logout_path
+    
+    - flash.each do |name, msg|
+      %div{:id => "flash_#{name}"}= msg
+
+    %h1=h yield(:title)
+
+    = yield

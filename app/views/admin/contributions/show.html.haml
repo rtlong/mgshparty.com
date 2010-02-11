@@ -1,0 +1,16 @@
+- title "Contribution"
+
+%p
+  %strong Business:
+  =link_to @contribution.business.name, admin_business_path(@contribution.business)
+
+= render :partial => 'contributions/display', :locals => {:contribution => @contribution}
+
+%p
+  %strong Has been received:
+  = @contribution._received ? 'yes' : 'no'
+
+%p
+  = link_to "Edit", edit_admin_contribution_path(@contribution)
+  |
+  = link_to "View All", admin_contributions_path

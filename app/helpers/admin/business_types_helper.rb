@@ -1,0 +1,3 @@
+module Admin::BusinessTypesHelper
+
+end

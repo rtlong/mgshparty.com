@@ -1,0 +1,40 @@
+- title "Contribution Details"
+- centered
+
+%h1 Forget something? 
+%h3 Since we already have a contribution on file for you, we'll assume something was incorrect. Please make any corrections below.
+
+- semantic_form_for @contribution, :url => business_contribution_path(@contribution.business), :method => :put do |f|
+  - f.semantic_fields_for :business do |business|
+    - business.inputs "Business" do
+      = business.input :name, :label => 'Name'
+      = business.input :business_type, :label => "Type", :hint => "In to which of these does your business best fit?"
+      = business.input :phone, :label => 'Phone', :hint => "ex. 763-555-2135 x123"
+    
+    - business.inputs "Address", :class => 'address' do
+      = business.input :street,  :label => 'Street',   :wrapper_html => { :class => 'street'}
+      = business.input :street2, :label => false,      :wrapper_html => { :class => 'street'}
+      = business.input :city,    :label => 'City',     :wrapper_html => { :class => 'city'}
+      = business.input :state,   :label => 'State',    :wrapper_html => { :class => 'state'}, :as => :select, :collection => Addressing::STATES.values.uniq.sort
+      = business.input :zip,     :label => 'Zip Code', :wrapper_html => { :class => 'zip'},    :input_html => { :size => 10 }
+    
+    - business.inputs "Contact" do
+      %p Please tell us how to contact you.
+      = business.input :contact_name, :label => 'Name'
+      = business.input :contact_department, :label => 'Department', :hint => 'If this information is neccessary in order for a mailing to get directly to you, please include your department'
+      = business.input :contact_phone, :label => 'Phone', :hint => "ex. 763-555-2135 x123"
+      = business.input :contact_email, :label => 'Email Address'
+      
+
+  - f.inputs "Contribution" do
+    = f.input :nature, :label => "Nature", :hint => "What is the nature of your donation?"
+    = f.input :value,  :label => "Approximate Value", :hint => "What is the value of your donation?"
+        
+    - f.inputs "Delivery" do
+      = f.input :delivery_method, :label => "How will your donation get to us?", :as => :radio, :collection => delivery_methods_collection
+      = f.input :delivery_details, :label => "Details", :input_html => {:rows => 3}, :hint => "Any details regarding the above mode of delivery"
+    
+    = f.input :message, :label => "Message", :hint => "If there is anything else you'd like to tell us abut your contribution, do it here.", :input_html => {:rows => 5}
+    
+  - f.buttons do
+    = f.commit_button "Save"

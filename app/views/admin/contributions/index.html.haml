@@ -1,0 +1,21 @@
+- title "Contributions"
+
+%table
+  %tr
+    %th Business
+    %th Nature
+    %th Value
+    %th Message
+    %th Delivery method
+    %th Delivery details
+    %th Received?
+  - for contribution in @contributions
+    %tr
+      %td= link_to contribution.business.name, admin_business_path(contribution.business)
+      %td= h contribution.nature
+      %td= ("$%.2f" % contribution.value)
+      %td= h contribution.message
+      %td= delivery_method_details(contribution.delivery_method)
+      %td= h contribution.delivery_details
+      %td= contribution._received ? 'yes' : 'no'
+      %td= link_to "view", admin_contribution_path(contribution)

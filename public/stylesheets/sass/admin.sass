@@ -1,0 +1,30 @@
+@import colors
+!primary_color = #ffffff
+!background_color = #000000
+
+body
+  :background-color = !background_color
+  :font
+    :family Verdana, Helvetica, Arial
+    :size 14px
+  :color = !primary_color
+
+a
+  :color = !primary_color
+  img
+    :border none
+    
+form.formtastic
+  fieldset
+    :border-color = !primary_color
+    
+table
+  tr
+    th
+      :color = !background_color
+      :background-color = !primary_color
+      :border-color = !background_color
+    td
+      :border-color = !primary_color
+    &.business_name
+      :background-color = !background_color + #531

@@ -1,0 +1,58 @@
+- title "Business: #{@business.name}", true
+
+%div
+  Type: 
+  - if @business.business_type
+    = link_to(@business.business_type.name, admin_business_type_path(@business.business_type))
+  - else
+    undefined
+
+%div
+  %h3 Address:
+  %address
+    =h @business.street
+    - if @business.street2
+      %br
+      =h @business.street2
+    %br
+    #{h @business.city}, #{h @business.state} #{h @business.zip}
+    
+%div
+  %h3 Phone:
+  = @business.phone
+
+- if @business.contact_name or @business.contact_phone or @business.contact_email
+  %div
+    %h3 Contact Info:
+    - if @business.contact_name
+      %div Name: #{@business.contact_name}
+    - if @business.contact_phone
+      %div Phone: #{@business.contact_phone}
+    - if @business.contact_email
+      %div Email: #{@business.contact_email}
+    
+
+- if @business.responded_at
+  %div 
+    %h3 Response
+    received #{@business.responded_at.strftime("%B %d")}
+  
+- if @contribution
+  %h2= link_to "Contribution", admin_contribution_path(@contribution)
+  %div
+    %h3 What is thier contribution?
+    %b> #{h @contribution.nature}
+    , valued at #{("$%.2f" % @contribution.value)}
+  %p 
+    = delivery_method_details(@contribution.delivery_method)
+    = h @contribution.delivery_details
+
+  - if @contribution.message
+    %div
+      %h3 Message
+      %p= h @contribution.message
+  
+%div
+  = link_to "View All", admin_businesses_path
+  |
+  = link_to "Edit", edit_admin_business_path(@business)

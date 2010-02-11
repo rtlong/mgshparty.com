@@ -1,0 +1,16 @@
+if @businesses.nil? then
+  page.replace_html 'business_name_results', "<tr><td colspan='3'><i>Too many results. Please refine your search...</i></td></tr>"
+  page.show 'results_table'
+  page.hide 'create_button'
+  
+elsif @businesses.empty? then
+  page.hide 'results_table'
+  page.show 'create_button'
+  
+else
+  page.replace_html 'business_name_results', :partial => 'auto_complete_entry', :collection => @businesses, :as => :business
+  page.show 'results_table'
+  page.hide 'create_button'
+end
+
+

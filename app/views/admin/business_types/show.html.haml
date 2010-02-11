@@ -1,0 +1,19 @@
+- title @business_type.name
+
+- form_for [:admin, @business_type] do |f|
+  = f.error_messages
+  %p
+    = f.label :name, "Rename"
+    %br
+    = f.text_field :name
+    = f.submit "Rename"
+
+%p
+  = link_to "Destroy", [:admin, @business_type], :confirm => "Are you sure? \nThe types of all the businesses assigned to this type will be reset.", :method => :delete
+  |
+  = link_to "View All Types", admin_business_types_path
+  
+%h2 Businesses labeled "#{@business_type.name}"
+%ul
+  - for business in @business_type.businesses
+    %li= link_to business.name, admin_business_path(business)

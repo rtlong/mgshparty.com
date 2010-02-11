@@ -1,0 +1,10 @@
+- title "Business Details - Contribute"
+- centered
+
+%h1 Please confirm the details about your business, adding any information missing.
+%p This will help us to make sure we can efficiently process your contribution.
+
+- semantic_form_for @business do |business|
+  = render :partial => "fields", :locals => {:f => business}  
+  - business.buttons do
+    = business.commit_button "Next"
