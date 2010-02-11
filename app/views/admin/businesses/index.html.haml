@@ -13,8 +13,10 @@
           %td{:colspan => 5}= business_name
         - for business in businesses
           - fields_for "business[]", business do |f|
-            %tr
-              %td= f.check_box :mailing_required
+            %tr.business
+              %td
+                = f.check_box :mailing_required
+                = observe_field "business_#{business.id}_mailing_required", :function => set_mailing_required(business.id), :frequency => 0
               %td.indented= link_to( business.street, admin_business_path(business) )
               %td= business.responded_at ? business.responded_at.strftime("%b %d") : nil
               %td= link_to( business.contribution.nature, admin_contribution_path(business.contribution) ) unless business.contribution.nil?

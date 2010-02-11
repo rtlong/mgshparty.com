@@ -4,8 +4,9 @@ class Admin::BusinessesController < Admin::AdminController
       format.html do
         @businesses = Business.all(:include => :contribution, :order => 'responded_at DESC').group_by{|b| b.contribution.nil?}.collect{|has_contribution, businesses| businesses.group_by(&:name)}
       end
+
       format.csv do
-        @businesses = Business.all :conditions => "mailing_required IS NOT NULL"
+        @businesses = Business.all :conditions => "mailing_required = 1", :order => :name
         fields = [:id, :name, :contact_name, :contact_department, :street, :street2, :city, :state, :zip]
         render :text => [ 
             fields.join(','), 
