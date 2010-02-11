@@ -29,22 +29,24 @@ class Admin::BusinessesController < Admin::AdminController
   
   def update
     @business = Business.find(params[:id])
-    if @business.update_attributes(params[:business])
+    @business.attributes = params[:business]
+    success = @business.save(false)
+    if success
       flash[:notice] = "Successfully updated business."
-      redirect_to admin_business_path(@business)
     else
-      render :action => 'edit'
+      flash[:error] = "Problem saving business."
     end
-  end
-  
-  def update_multiple
-    params[:business].each_pair do |business_id, business_params|
-      business = Business.find(business_id)
-      business.update_attributes business_params
+
+    respond_to do |format|
+      format.html do
+        if success
+          redirect_to admin_business_path(@business)
+        else
+          render :action => 'edit'
+        end
+      end
+      format.js
     end
-  
-  
-    redirect_to admin_businesses_path
   end
 
 end

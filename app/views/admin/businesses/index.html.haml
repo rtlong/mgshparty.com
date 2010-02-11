@@ -1,24 +1,22 @@
 - title "All Businesses"
 
+- #form_tag admin_update_multiple_businesses_path, :method => :put, :html => {:id => 'form'} do
 - @businesses.each do |has_contribution|
-  - form_tag admin_update_multiple_businesses_path, :method => :put do
-    %table
-      %tr
-        %th Mail
-        %th{:width => '50%'} Name
-        %th{:width => '20%'} Date Responded
-        %th{:width => '30%'} Contribution
-      - has_contribution.each_pair do |business_name, businesses|
-        %tr.business_name
-          %td{:colspan => 5}= business_name
-        - for business in businesses
-          - fields_for "business[]", business do |f|
-            %tr.business
-              %td
-                = f.check_box :mailing_required
-                = observe_field "business_#{business.id}_mailing_required", :function => set_mailing_required(business.id), :frequency => 0
-              %td.indented= link_to( business.street, admin_business_path(business) )
-              %td= business.responded_at ? business.responded_at.strftime("%b %d") : nil
-              %td= link_to( business.contribution.nature, admin_contribution_path(business.contribution) ) unless business.contribution.nil?
-
-    = submit_tag "Update"
+  %table
+    %tr
+      %th Mail
+      %th{:width => '50%'} Name
+      %th{:width => '20%'} Date Responded
+      %th{:width => '30%'} Contribution
+    - has_contribution.each_pair do |business_name, businesses|
+      %tr.business_name
+        %td{:colspan => 5}= business_name
+      - for business in businesses
+        - fields_for "business[]", business do |f|
+          %tr.business{:id => "business_#{business.id}_tr"}
+            %td
+              = f.check_box :mailing_required
+              = observe_field "business_#{business.id}_mailing_required", :url => admin_business_url(business.id, :format => :js), :method => :put, :with => "'business[mailing_required]=' + value"
+            %td.indented= link_to( business.street, admin_business_path(business) )
+            %td= business.responded_at ? business.responded_at.strftime("%b %d") : nil
+            %td= link_to( business.contribution.nature, admin_contribution_path(business.contribution) ) unless business.contribution.nil?

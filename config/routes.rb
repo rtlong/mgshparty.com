@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
-    admin.update_multiple_businesses "businesses", :controller => "businesses", :action => :update_multiple, :conditions => {:method => :put}
-    admin.resources :businesses
+    #admin.update_multiple_businesses "businesses", :controller => "businesses", :action => :update_multiple, :conditions => {:method => :put}
+    admin.resources :businesses, :collection => {:update => :put}
     admin.resources :contributions  
     admin.resources :business_types
     admin.resources :sessions

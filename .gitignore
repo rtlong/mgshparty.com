@@ -1,6 +1,5 @@
 log/*.log
 tmp/**/*
-tmp/*
 .sass_cache
 config/database.yml
 db/*.sqlite3

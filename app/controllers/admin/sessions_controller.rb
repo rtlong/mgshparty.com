@@ -7,7 +7,7 @@ class Admin::SessionsController < Admin::AdminController
   def create
     user = User.authenticate(params[:login], params[:password])
     if user
-      session[:user_id] = user.id
+      session[:user] = user
       flash[:notice] = "Logged in successfully."
       redirect_to_target_or_default(admin_root_url)
     else
@@ -17,7 +17,7 @@ class Admin::SessionsController < Admin::AdminController
   end
   
   def destroy
-    session[:user_id] = nil
+    session[:user] = nil
     flash[:notice] = "You have been logged out."
     redirect_to root_url
   end
