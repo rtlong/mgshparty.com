@@ -99,5 +99,14 @@ table {
     border-color: #cccccc; }
   table tr td {
     border-color: #660000; }
-  table tr td.indented {
-    padding-left: 10px; }
+    table tr td.indented {
+      padding-left: 10px; }
+
+h1 .note, h2 .note, h3 .note, h4 .note, h5 .note, h6 .note {
+  display: inline;
+  font-size: 50%; }
+
+#userinfo {
+  float: right;
+  padding: 10px;
+  background-color: #006b93; }

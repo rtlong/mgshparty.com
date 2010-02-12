@@ -1,12 +1,11 @@
 module ContributionsHelper
   DELIVERY_METHODS_DESCRIPTIONS = { :mail =>    "I will mail it.", 
-                                    :deliver => "I will bring it to the school.", 
                                     :pickup =>  "It will need to be picked up.", 
                                     :other =>   "Other (see details)" }.freeze
 
   # to change the order in which the methods are shown, define DELIVERY_METHODS_ORDER
   #
-  DELIVERY_METHODS_ORDER = [:mail, :pickup, :deliver, :other].freeze
+  DELIVERY_METHODS_ORDER = [:mail, :pickup, :other].freeze
   #
   def delivery_methods_collection
     (DELIVERY_METHODS_ORDER || Contribution::DELIVERY_METHODS).collect do |method|

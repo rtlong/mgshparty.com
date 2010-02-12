@@ -11,7 +11,8 @@
   %body
     - if logged_in?
       #userinfo
-        Logged in as #{current_user.username}
+        Logged in as 
+        %strong= #{current_user.username}
         = link_to "Log Out", admin_logout_path
     
     - flash.each do |name, msg|

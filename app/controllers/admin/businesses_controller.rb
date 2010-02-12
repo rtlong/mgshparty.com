@@ -2,11 +2,12 @@ class Admin::BusinessesController < Admin::AdminController
   def index
     respond_to do |format|
       format.html do
-        @businesses = Business.all(:include => :contribution, :order => 'responded_at DESC').group_by{|b| b.contribution.nil?}.collect{|has_contribution, businesses| businesses.group_by(&:name)}
+        @responded_businesses = Business.responded.full_search(params[:q]).all(:include => :contribution, :order => 'responded_at DESC')
+        @other_businesses = Business.not_responded.full_search(params[:q]).all
       end
 
       format.csv do
-        @businesses = Business.all :conditions => "mailing_required = 1", :order => :name
+        @businesses = Business.not_responded.all :conditions => :mailing_required, :order => :name
         fields = [:id, :name, :contact_name, :contact_department, :street, :street2, :city, :state, :zip]
         render :text => [ 
             fields.join(','), 

@@ -8,9 +8,11 @@ class Admin::ContributionsController < Admin::AdminController
   end
 
   def new
+    @contribution = Contribution.new
   end
 
   def edit
+    @contribution = Contribution.find params[:id]
   end
 
 end

@@ -1,8 +1,20 @@
-- title "Edit Admin/Contributions"
+- title "Edit Contributions"
+
+%menu.actions
+  %li= link_to "Cancel Edit", admin_contribution_path(@contribution)
+  %li= link_to "View All Contributions", admin_contributions_path
+  
+.business
+  %h2 Business
+  %dl
+    %dt Name:
+    %dd= h @contribution.business.name
+    %dt Address:
+    %dd
+      
 
 = render :partial => 'form'
 
-%p
-  = link_to "Show", admin/contributions_path(@admin/contributions)
-  |
-  = link_to "View All", admin/contributions_path
+%menu.actions
+  %li= link_to "Cancel Edit", admin_contribution_path(@contribution)
+  %li= link_to "View All Contributions", admin_contributions_path

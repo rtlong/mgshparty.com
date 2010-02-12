@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100210192055) do
+ActiveRecord::Schema.define(:version => 20100212221845) do
 
   create_table "business_types", :force => true do |t|
     t.string   "name"
@@ -20,33 +20,34 @@ ActiveRecord::Schema.define(:version => 20100210192055) do
   create_table "businesses", :force => true do |t|
     t.string   "name",                                               :null => false
     t.integer  "business_type_id"
-    t.string   "phone"
     t.string   "contact_name"
     t.string   "contact_department"
-    t.string   "contact_phone"
     t.string   "contact_email"
     t.string   "street",                                             :null => false
     t.string   "street2"
     t.string   "city",                                               :null => false
     t.string   "state",                                              :null => false
-    t.string   "zip",                :limit => 10,                   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "responded_at"
     t.boolean  "mailing_required",                 :default => true
-    t.boolean  "mailing_printed"
+    t.integer  "phone",              :limit => 10
+    t.integer  "phone_ext"
+    t.integer  "contact_phone",      :limit => 10
+    t.integer  "contact_phone_ext"
+    t.integer  "zip",                :limit => 9
   end
 
   create_table "contributions", :force => true do |t|
-    t.integer  "business_id",                                                       :null => false
-    t.string   "nature",                                                            :null => false
-    t.decimal  "value",            :precision => 8, :scale => 2, :default => 0.0,   :null => false
+    t.integer  "business_id",                       :null => false
+    t.string   "nature",                            :null => false
+    t.decimal  "value",            :default => 0.0, :null => false
     t.text     "message"
-    t.integer  "delivery_method",                                                   :null => false
+    t.integer  "delivery_method",                   :null => false
     t.text     "delivery_details"
-    t.boolean  "_received",                                      :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "received_at"
   end
 
   create_table "users", :force => true do |t|

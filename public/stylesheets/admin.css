@@ -1,22 +1,24 @@
 body {
-  background-color: #000000;
+  background-color: black;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
-  color: #ffffff; }
+  color: white; }
 
 a {
-  color: #ffffff; }
+  color: white; }
   a img {
     border: none; }
 
 form.formtastic fieldset {
-  border-color: #ffffff; }
+  border-color: white; }
 
 table tr th {
-  color: #000000;
-  background-color: #ffffff;
-  border-color: #000000; }
+  color: black;
+  background-color: white;
+  border-color: black; }
 table tr td {
-  border-color: #ffffff; }
-table tr.business_name {
-  background-color: #553311; }
+  border-color: #555555; }
+table tr.even {
+  background-color: #333333; }
+table tr.odd {
+  background-color: black; }

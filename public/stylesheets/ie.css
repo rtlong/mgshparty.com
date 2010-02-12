@@ -1,0 +1,4 @@
+form.formtastic fieldset.address li.city, form.formtastic fieldset.address li.state, form.formtastic fieldset.address li.zip {
+      zoom: 1; 
+      *display: inline;
+}

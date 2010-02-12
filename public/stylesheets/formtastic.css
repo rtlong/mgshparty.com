@@ -45,7 +45,6 @@ form.formtastic {
     width: auto;
     clear: none; }
   form.formtastic .date label, form.formtastic .time label, form.formtastic .datetime label {
-    display: none;
     width: auto; }
   form.formtastic .date input, form.formtastic .time input, form.formtastic .datetime input {
     display: inline;
@@ -153,7 +152,9 @@ form.formtastic {
     #position: relative; }
   form.formtastic fieldset {
     margin-top: 10px;
-    border: 1px solid black; }
+    border: 1px solid black;
+    padding: 10px;
+    overflow: hidden; }
     form.formtastic fieldset legend {
       font-size: larger;
       padding: 0px 3px; }
@@ -177,9 +178,15 @@ form.formtastic {
         margin-left: 15px;
         margin-top: 0; }
     form.formtastic fieldset.address li.city, form.formtastic fieldset.address li.state, form.formtastic fieldset.address li.zip {
-      display: inline-block; }
+      display: -moz-inline-stack;
+      display: inline-block;
+      zoom: 1; }
     form.formtastic fieldset.address li.city {
       width: 50%; }
+    form.formtastic fieldset.address li.state {
+      width: 10%; }
+    form.formtastic fieldset.address li.zip {
+      width: 23%; }
     form.formtastic fieldset.buttons {
       border: none;
       text-align: center; }

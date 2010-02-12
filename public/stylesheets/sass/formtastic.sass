@@ -10,6 +10,8 @@ form.formtastic
   fieldset
     :margin-top 10px
     :border 1px solid black
+    :padding 10px
+    :overflow hidden
     legend
       :font-size larger
       :padding 0px 3px
@@ -42,11 +44,16 @@ form.formtastic
     &.address
       li.street
       li.city, li.state, li.zip
+        :display -moz-inline-stack
         :display inline-block
+        :zoom 1
+        
       li.city
         :width 50%
       li.state
+        :width 10%
       li.zip
+        :width 23%
   
     &.buttons
       :border none

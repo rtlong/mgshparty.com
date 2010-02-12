@@ -1,5 +1,7 @@
 - title "Business: #{@business.name}", true
 
+= render :partial => 'businesses/display', :locals => {:business => @business}
+
 %div
   Type: 
   - if @business.business_type

@@ -7,8 +7,8 @@
 = render :partial => 'contributions/display', :locals => {:contribution => @contribution}
 
 %p
-  %strong Has been received:
-  = @contribution._received ? 'yes' : 'no'
+  %h3 Received
+  = @contribution.received_at ? time_ago_in_words(@contribution.received_at) : "Not received"
 
 %p
   = link_to "Edit", edit_admin_contribution_path(@contribution)

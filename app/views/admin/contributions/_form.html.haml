@@ -1,2 +1,15 @@
 - semantic_form_for [:admin, @contribution] do |f|
-  
+  - f.inputs "Contribution" do
+    = f.input :nature, :label => "Nature", :hint => "What is the donation?"
+    = f.input :value,  :label => "Approximate Value", :hint => "What is the value?"
+        
+    - f.inputs "Delivery" do
+      = f.input :delivery_method, :label => "How will/did it get to us?", :as => :radio, :collection => delivery_methods_collection
+      = f.input :delivery_details, :label => "Details", :input_html => {:rows => 3}, :hint => "Any details regarding the above mode of delivery"
+    
+    = f.input :message, :label => "Message", :input_html => {:rows => 5}
+    
+    = f.input :received_at, :label => "Received"
+    
+  - f.buttons do
+    = f.commit_button "Save"

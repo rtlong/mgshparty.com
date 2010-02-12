@@ -4,13 +4,15 @@
 %p Phone Number: #{business.phone}
 %div
   %h3 Address
-  %address
+  .address
     =h business.street
     -if business.street2
       %br
       =h business.street2
     %br
-    #{h business.city}, #{h business.state} #{h business.zip}
+    #{h business.city}, 
+    %abbr{:title => Addressing::STATES[business.state]}= h business.state 
+    #{h business.zip}
 
 - if business.contact_name or business.contact_phone or business.contact_email
   %div

@@ -38,4 +38,29 @@ class Business < ActiveRecord::Base
       { :conditions => conditions }
     end
   }
+  
+  named_scope :full_search, lambda{ |*args|
+    args.map do |arg|
+      if arg.respond_to? :to_s
+        arg.to_s.strip
+      end
+    end
+    args.compact!
+    column_names = %w(name street)
+    unless args.empty? then
+      keywords = args.shift.split(" ").push(args).flatten.compact
+      
+      keywords.map!{|keyword| "%#{keyword}%"}
+
+      conditions = keywords.collect{ |keyword|
+        condition = column_names.collect { |column_name| "#{column_name} LIKE ?" }.join(" OR ")
+        "(#{condition})"
+      }.join(" AND ")
+      
+      { :conditions => [conditions, (keywords * column_names.length).sort].flatten }
+    end
+  }
+  
+  named_scope :responded, :conditions => 'responded_at IS NOT NULL'
+  named_scope :not_responded, :conditions => 'responded_at IS NULL'
 end
