@@ -2,20 +2,26 @@
 
 %table
   %tr
-    %th Business
     %th Nature
     %th Value
-    %th Message
-    %th Delivery method
-    %th Delivery details
+    %th Business
+    %th Delivery
     %th Received?
+    %th Date Responded
   - for contribution in @contributions
-    %tr
-      %td= link_to contribution.business.name, admin_business_path(contribution.business)
-      %td= h contribution.nature
+    - content_tag_for :tr, contribution, :class => cycle('even','odd') do
+      %td= link_to contribution.nature, admin_contribution_path(contribution)
       %td= contribution.value
-      %td= h contribution.message
-      %td= delivery_method_details(contribution.delivery_method)
-      %td= h contribution.delivery_details
-      %td= time_ago_in_words(contribution.received_at) if contribution.received?
-      %td= link_to "view", admin_contribution_path(contribution)
+      %td= link_to contribution.business.name, admin_business_path(contribution.business)
+      %td
+        = delivery_method_details(contribution.delivery_method)
+        - if contribution.delivery_details?
+          %br/
+          = h contribution.delivery_details
+      %td
+        - if contribution.received?
+          = time_ago_in_words(contribution.received_at) 
+        - else
+          - #FIXME
+          = link_to_remote "mark as received"
+      %td= contribution.created_at.strftime("%b %d")

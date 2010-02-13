@@ -18,7 +18,6 @@
               %li= link_to *action
       %menu#nav
         - for action in controllers_for_nav
-          - logger.info controller.controller_name
           - unless action.to_s == controller.controller_name
             %li= link_to action.to_s.titleize, :controller => action
       
