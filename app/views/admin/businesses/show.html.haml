@@ -1,30 +1,28 @@
-- title "Business: #{@business.name}", true
+- title "Business", true
 
 = render :partial => 'businesses/display', :locals => {:business => @business}
-
-
 
 - if @business.responded_at
   %div 
     %h3 Response
-    received #{@business.responded_at.strftime("%B %d")}
+    received #{time_ago_in_words(@business.responded_at)}
   
+%h2 Contribution
 - if @contribution
-  %h2= link_to "Contribution", admin_contribution_path(@contribution)
+  %div= link_to "View", admin_contribution_path(@contribution)
   %div
     %h3 What is thier contribution?
-    %b> #{h @contribution.nature}
+    %strong> #{h @contribution.nature}
     , valued at #{("$%.2f" % @contribution.value)}
-  %p 
+  %div 
     = delivery_method_details(@contribution.delivery_method)
     = h @contribution.delivery_details
 
-  - if @contribution.message
+  - if @contribution.message?
     %div
       %h3 Message
       %p= h @contribution.message
-  
-%div
-  = link_to "View All", admin_businesses_path
-  |
-  = link_to "Edit", edit_admin_business_path(@business)
+- else
+  %div= link_to "Add", new_admin_contribution_path
+
+= link_to("Edit", edit_admin_business_path(@business))

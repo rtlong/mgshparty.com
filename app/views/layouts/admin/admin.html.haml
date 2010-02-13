@@ -9,15 +9,26 @@
     = yield(:head)
   
   %body
-    - if logged_in?
-      #userinfo
-        Logged in as 
-        %strong= #{current_user.username}
-        = link_to "Log Out", admin_logout_path
-    
+    #infobar
+      %h1=h yield(:title)
+      - if @actions
+        %menu#actions
+          - for action in @actions
+            - unless current_page?(action.last)
+              %li= link_to *action
+      %menu#nav
+        - for action in controllers_for_nav
+          - logger.info controller.controller_name
+          - unless action.to_s == controller.controller_name
+            %li= link_to action.to_s.titleize, :controller => action
+      
+      - if logged_in?
+        #userinfo
+          Logged in as <strong>#{current_user.username}</strong>.
+          = link_to "Log Out", admin_logout_path  
+
     - flash.each do |name, msg|
       %div{:id => "flash_#{name}"}= msg
 
-    %h1=h yield(:title)
+    .content= yield
 
-    = yield

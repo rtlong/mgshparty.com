@@ -1,5 +1,8 @@
 class Admin::BusinessesController < Admin::AdminController
+  before_filter :set_actions
+
   def index
+    @actions.push ["Add", {:action => 'new'}]
     respond_to do |format|
       format.html do
         @responded_businesses = Business.responded.full_search(params[:q]).all(:include => :contribution, :order => 'responded_at DESC')
@@ -18,14 +21,33 @@ class Admin::BusinessesController < Admin::AdminController
   end
 
   def show
+    @actions.push ["Create New", {:action => 'new'}]
+    @actions.push ["Edit", {:action => 'edit'}]
+    
     @business = Business.find params[:id], :include => :contribution
     @contribution = @business.contribution
   end
 
   def new
+    @actions.push ["Cancel", {:action => 'show'}]
+    
+    @business = Business.new
+  end
+  
+  def create
+    @business = Business.new(params[:business])
+    if @business.save
+      flash[:notice] = "Successfully added business."
+      redirect_to [:admin, @business]
+    else
+      flash[:error] = "Problem with saving."
+      render :action => 'new'
+    end
   end
 
   def edit
+    @actions.push ["Cancel", {:action => 'show'}]
+    
     @business = Business.find params[:id], :include => :contribution
   end
   

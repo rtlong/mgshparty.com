@@ -9,7 +9,9 @@
     
     = f.input :message, :label => "Message", :input_html => {:rows => 5}
     
-    = f.input :received_at, :label => "Received"
+    - f.inputs "Received" do
+      = f.input :received, :label => "Was it?", :as => :boolean
+      = f.input :received_at, :label => "When?"
     
   - f.buttons do
     = f.commit_button "Save"

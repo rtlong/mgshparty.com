@@ -30,3 +30,65 @@ table
       :background-color = !background_color + #333333
     &.odd
       :background-color = !background_color
+      
+.content
+  :padding 60px 20px 20px 20px
+      
+#infobar
+  :background-color #006b93   
+  :position fixed
+  :top 0
+  :left 0
+  :width 100%
+  :height 40px
+  :border-color #0090c5
+  :border-bottom
+    :width 5px
+    :style solid
+  h1
+    :background-color #006b93 
+    :font-size 28px
+    :float left
+    :margin 0
+    :padding 8px 12px 5px 12px
+    :height 40px
+    :border
+      :style groove
+      :color #0090c5
+      :width 0 8px 8px 0
+      
+menu#actions, menu#nav
+  :float left
+  :list-style none
+  :padding 0
+  :margin
+    :top 10px
+    :bottom 0
+    :left 20px
+    :right 0
+  li
+    :font
+      :size 18px
+      :weight bold
+    :display inline-block
+    a
+      :padding 3px 6px
+      :text-decoration none
+      &:hover
+        :background-color = !primary_color
+        :color #006b93 
+menu#actions
+  :color = !primary_color
+  a
+    :color = !primary_color
+menu#nav
+  :color = !primary_color - #691800
+  a
+    :color = !primary_color - #691800
+    
+#userinfo
+  :float right
+  :padding 10px
+  
+#search_box
+  :float right

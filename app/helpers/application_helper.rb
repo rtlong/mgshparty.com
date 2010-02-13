@@ -8,5 +8,8 @@ module ApplicationHelper
       link_text
     end
   end
-
+  
+  def controllers_for_nav
+    [ :businesses, :business_types, :contributions ]
+  end
 end

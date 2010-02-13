@@ -1,4 +1,6 @@
 class Admin::ContributionsController < Admin::AdminController
+  before_filter :set_actions
+  
   def index
     @contributions = Contribution.all :include => :business
   end
