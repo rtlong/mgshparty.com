@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100212221845) do
+ActiveRecord::Schema.define(:version => 20100213022937) do
 
   create_table "business_types", :force => true do |t|
     t.string   "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20100212221845) do
     t.integer  "contact_phone",      :limit => 10
     t.integer  "contact_phone_ext"
     t.integer  "zip",                :limit => 9
+    t.integer  "zip4"
   end
 
   create_table "contributions", :force => true do |t|

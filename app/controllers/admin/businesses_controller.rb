@@ -7,8 +7,9 @@ class Admin::BusinessesController < Admin::AdminController
       end
 
       format.csv do
-        @businesses = Business.not_responded.all :conditions => :mailing_required, :order => :name
         fields = [:id, :name, :contact_name, :contact_department, :street, :street2, :city, :state, :zip]
+        @businesses = Business.not_responded.all :conditions => :mailing_required, :order => :name, :select => fields.join(',')
+        
         render :text => [ 
             fields.join(','), 
             @businesses.collect{ |b| fields.map{ |f| b.send(f) }.join(',') } ].flatten.join("\n")

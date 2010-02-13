@@ -10,6 +10,8 @@ class Contribution < ActiveRecord::Base
   accepts_nested_attributes_for :business
 
   validates_presence_of :nature, :value, :delivery_method
+  
+  named_scope :received, :condition => 'received_at IS NOT NULL'
                   
   def delivery_method
     if self[:delivery_method] then
@@ -22,4 +24,17 @@ class Contribution < ActiveRecord::Base
   def delivery_method=(method)
     self[:delivery_method] = DELIVERY_METHODS.index method.to_sym
   end
+  
+  def value
+    DollarValue.new(self[:value])
+  end
+  
+  def value=(value)
+    self[:value] = DollarValue.new(value).to_f
+  end
+
+  def received?
+    received_at?
+  end
+  
 end

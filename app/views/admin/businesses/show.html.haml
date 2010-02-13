@@ -2,37 +2,7 @@
 
 = render :partial => 'businesses/display', :locals => {:business => @business}
 
-%div
-  Type: 
-  - if @business.business_type
-    = link_to(@business.business_type.name, admin_business_type_path(@business.business_type))
-  - else
-    undefined
 
-%div
-  %h3 Address:
-  %address
-    =h @business.street
-    - if @business.street2
-      %br
-      =h @business.street2
-    %br
-    #{h @business.city}, #{h @business.state} #{h @business.zip}
-    
-%div
-  %h3 Phone:
-  = @business.phone
-
-- if @business.contact_name or @business.contact_phone or @business.contact_email
-  %div
-    %h3 Contact Info:
-    - if @business.contact_name
-      %div Name: #{@business.contact_name}
-    - if @business.contact_phone
-      %div Phone: #{@business.contact_phone}
-    - if @business.contact_email
-      %div Email: #{@business.contact_email}
-    
 
 - if @business.responded_at
   %div 

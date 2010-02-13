@@ -213,7 +213,7 @@ module Addressing
 
   CITY_PATTERN = /([[:alpha:]](?:(?:\.? |-)?[[:alpha:]]+)*)/ # Starts with a letter, followed by words seperated by space, hyphen, or period-space
   STATE_PATTERN = /(?:(A[AELKSZRP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])|((?:[[:alpha:]]+ ){0,3}[[:alpha:]]{4,12}))/ # Matches all legal U.S. state two-letter abbreviation or, failing that, a few words which will later be checked with an enum to be a valid state name. TODO Put state names in this expression. They are constant and can be defined here. Should also keep the above hash (STATES) for translation to the respective abbreviation or the full name.
-  ZIP_PATTERN = /(?!0{5})(\d{5}(?:-?\d{4})?)/ # matches any legal U.S. ZIP Code
+  ZIP_PATTERN = /(?!0{5})(\d{5})(?:-?(\d{4}))?/ # matches any legal U.S. ZIP Code
   ADDRESS_LAST_LINE_PATTERN = /#{CITY_PATTERN.source}, #{STATE_PATTERN.source} #{ZIP_PATTERN.source}/
 
   EMAIL_USER_CHARS = "[:alnum:]!$%&'*+\/=?^_`{|}~-" # all legal characters for email mailbox name (excluding the \.)

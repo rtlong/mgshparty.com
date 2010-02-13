@@ -1,1 +1,2 @@
 page.visual_effect :highlight, "business_#{@business.id}", :startcolor => "#19ff19"
+flash.clear

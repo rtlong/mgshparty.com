@@ -1,12 +1,13 @@
 %h2= h business.name
 
-%p Business Type: #{admin_link_to(business.business_type.name, business.business_type)}
-%p Phone Number: #{business.phone}
+- if business.business_type_id?
+  %p Business Type: #{admin_link_to(business.business_type.name, business.business_type)}
+%p Phone Number: #{number_to_phone(business.phone, :extension => business.phone_ext, :area_code => true)}
 %div
   %h3 Address
   .address
     =h business.street
-    -if business.street2
+    -if business.street2?
       %br
       =h business.street2
     %br
@@ -14,13 +15,13 @@
     %abbr{:title => Addressing::STATES[business.state]}= h business.state 
     #{h business.zip}
 
-- if business.contact_name or business.contact_phone or business.contact_email
+- if business.contact_name? or business.contact_phone? or business.contact_email?
   %div
     %h3 Contact Info
-    - if business.contact_name
+    - if business.contact_name?
       %div Name: #{h business.contact_name}
-    - if business.contact_phone
+    - if business.contact_phone?
       %div Phone: #{h business.contact_phone}
-    - if business.contact_email
+    - if business.contact_email?
       %div Email: #{h business.contact_email}
 
