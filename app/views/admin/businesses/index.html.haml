@@ -51,9 +51,9 @@
       %th{:width => '25%'} Name
       %th Location
     - @other_businesses.each_with_index do |business, i|
-      %tr{:class => ['even', 'odd'][i % 2], :id => "b#{business.id}"}
+      %tr{:class => ['even', 'odd'][i % 2], :id => "business_#{business.id}"}
         %td
-          = check_box_tag "b#{business.id}_mr", 1
+          = check_box_tag "b#{business.id}_mr", 1, business.mailing_required
           = observe_field "b#{business.id}_mr", :url => "/admin/businesses/#{business.id}.js", :method => :put, :with => "'business[mailing_required]=' + value"
         %td= h business.name
         %td
