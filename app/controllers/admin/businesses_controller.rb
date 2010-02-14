@@ -15,7 +15,7 @@ class Admin::BusinessesController < Admin::AdminController
         @businesses = Business.not_responded.all :conditions => :mailing_required, :order => :name, :select => fields.join(',')
         
         render :text => [ 
-            fields.join('\t'), 
+            fields.join(';'), 
             @businesses.collect{ |b| fields.map{ |f| b.send(f) }.join(';') } ].flatten.join("\n")
       end
     end
