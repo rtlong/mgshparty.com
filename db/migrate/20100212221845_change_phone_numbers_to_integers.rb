@@ -1,10 +1,10 @@
 class ChangePhoneNumbersToIntegers < ActiveRecord::Migration
   def self.up
-    add_column :businesses, :phone_int, :integer, :limit => 10
+    add_column :businesses, :phone_int, :bigint
     add_column :businesses, :phone_ext, :integer
-    add_column :businesses, :contact_phone_int, :integer, :limit => 10
+    add_column :businesses, :contact_phone_int, :bigint
     add_column :businesses, :contact_phone_ext, :integer
-    add_column :businesses, :zip_int, :integer, :limit => 9
+    add_column :businesses, :zip_int, :integer
     Business.reset_column_information
     say_with_time "Updating businesses" do
       businesses = Business.all
