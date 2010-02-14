@@ -54,7 +54,7 @@
       %tr{:class => ['even', 'odd'][i % 2], :id => "b#{business.id}"}
         %td
           = check_box_tag "b#{business.id}_mr", 1
-          = observe_field "b#{business.id}_mr", :url => "#{business.id}.js", :method => :put, :with => "'mailing_required=' + value"
+          = observe_field "b#{business.id}_mr", :url => "/admin/businesses/#{business.id}.js", :method => :put, :with => "'mailing_required=' + value"
         %td= h business.name
         %td
-          %a{:href => business.id}= business.street
+          %a{:href => "/admin/businesses/#{business.id}"}= business.street
