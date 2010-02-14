@@ -49,14 +49,12 @@
     %tr
       %th{:width => '1%'} M
       %th{:width => '25%'} Name
-      %th{:width => ''} Location
-    - @other_businesses.group_by(&:name).each_pair do |business_name, locations|
-      - cycle('even', 'odd')
-      - locations.each do |business|
-        - fields_for "business[]", business do |f|
-          - content_tag_for :tr, business, :class => current_cycle do
-            %td
-              = f.check_box :mailing_required
-              = observe_field "business_#{business.id}_mailing_required", :url => admin_business_url(business.id, :format => :js), :method => :put, :with => "'business[mailing_required]=' + value"
-            %td= h business.name
-            %td= link_to( business.street, admin_business_path(business) )
+      %th Location
+    - @other_businesses.each_with_index do |business, i|
+      %tr{:class => ['even', 'odd'][i % 2], :id => "b#{business.id}"}
+        %td
+          = check_box_tag "b#{business.id}_mr", 1
+          = observe_field "b#{business.id}_mr", :url => "#{business.id}.js", :method => :put, :with => "'mailing_required=' + value"
+        %td= h business.name
+        %td
+          %a{:href => business.id}= business.street
