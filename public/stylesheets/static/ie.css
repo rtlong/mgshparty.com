@@ -2,3 +2,7 @@ form.formtastic fieldset.address li.city, form.formtastic fieldset.address li.st
       zoom: 1; 
       *display: inline;
 }
+
+#message{
+  width:100%
+}

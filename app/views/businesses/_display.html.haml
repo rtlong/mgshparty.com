@@ -1,27 +1,41 @@
-%h2= h business.name
+%h2= admin_link_to(business.name, business)
 
 - if business.business_type_id?
-  %p Business Type: #{admin_link_to(business.business_type.name, business.business_type)}
-%p Phone Number: #{number_to_phone(business.phone, :extension => business.phone_ext, :area_code => true)}
-%div
+  .business_type
+    %strong Business Type: 
+    = admin_link_to(business.business_type.name, business.business_type)
+    
+.phone
+  %strong Phone Number: 
+  = number_to_phone(business.phone, :extension => business.phone_ext, :area_code => true)
+  
+.address
   %h3 Address
-  .address
-    =h business.street
-    -if business.street2?
-      %br
-      =h business.street2
-    %br
-    #{h business.city}, 
-    %abbr{:title => Addressing::STATES[business.state]}= h business.state 
-    #{h business.zip}
+  .street= h business.street
+  - if business.street2?
+    .street2= h business.street2
+  %span.city #{h business.city}, 
+  %span.state
+    %abbr{:title => Addressing::STATES[business.state]}= business.state 
+  %span.zip= business.zip
 
-- if business.contact_name? or business.contact_phone? or business.contact_email?
-  %div
+- if business.has_contact_info?
+  .contact
     %h3 Contact Info
     - if business.contact_name?
-      %div Name: #{h business.contact_name}
+      .name
+        %strong Name: 
+        =h business.contact_name
+    - if business.contact_department?
+      .department
+        %strong Department: 
+        =h business.contact_department
     - if business.contact_phone?
-      %div Phone: #{h business.contact_phone}
+      .phone 
+        %strong Phone: 
+        = number_to_phone(business.contact_phone, :extension => business.contact_phone_ext, :area_code => true)
     - if business.contact_email?
-      %div Email: #{h business.contact_email}
+      .email
+        %strong Email: 
+        = mail_to business.contact_email
 

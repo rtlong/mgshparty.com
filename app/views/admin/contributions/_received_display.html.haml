@@ -1,0 +1,6 @@
+.received#received_at
+  - if @contribution.received?
+    It was received #{@contribution.received_at.to_words.downcase}
+  - else
+    It has not yet been received.
+    = link_to_remote "Mark as received today.", :url => {:action => :mark_received, :business_id => @business.id}

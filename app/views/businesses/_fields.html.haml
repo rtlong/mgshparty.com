@@ -8,7 +8,7 @@
   = f.input :street2, :label => false,      :wrapper_html => { :class => 'street'}
   = f.input :city,    :label => 'City',     :wrapper_html => { :class => 'city'}
   = f.input :state,   :label => 'State',    :wrapper_html => { :class => 'state'}, :as => :select, :collection => Addressing::STATES.keys.sort
-  = f.input :zip,     :label => 'Zip Code', :wrapper_html => { :class => 'zip'},    :input_html => { :size => 10 }
+  = f.input :zip,     :label => 'Zip Code', :wrapper_html => { :class => 'zip'},   :input_html => { :size => 10 }
 
 - f.inputs "Contact" do
   %p Please tell us how to contact you.

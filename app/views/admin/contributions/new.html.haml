@@ -1,5 +1,8 @@
-- title "New Admin/Contributions"
+- title "New Contribution"
 
+%h2 Business
+%strong Name:
+= link_to @business.name, admin_business_path(@business)
+
+%h2 Contribution
 = render :partial => 'form'
-
-%p= link_to "Back to List", admin/contributions_path

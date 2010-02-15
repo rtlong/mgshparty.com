@@ -1,0 +1,10 @@
+%h2 Contribution
+
+%p
+  :textile
+    _(business name)#{h contribution.business.name}_ will donate *(nature)#{h contribution.nature}*, valued at approximately %(value)#{contribution.value}%, and %(delivery)#{delivery_method_display(contribution)}%
+
+- if contribution.message?
+  .message
+    %h3 Additional Message
+    %p= h contribution.message

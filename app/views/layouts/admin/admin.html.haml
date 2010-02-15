@@ -26,8 +26,9 @@
           Logged in as <strong>#{current_user.username}</strong>.
           = link_to "Log Out", admin_logout_path  
 
-    - flash.each do |name, msg|
-      %div{:id => "flash_#{name}"}= msg
+    .content
+      - flash.each do |name, msg|
+        %div{:id => "flash_#{name}"}= msg
 
-    .content= yield
+      = yield
 

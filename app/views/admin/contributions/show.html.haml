@@ -1,16 +1,10 @@
 - title "Contribution"
 
-%p
-  %strong Business:
-  =link_to @contribution.business.name, admin_business_path(@contribution.business)
+.contribution
+  = render :partial => 'contributions/display', :locals => {:contribution => @contribution}
 
-= render :partial => 'contributions/display', :locals => {:contribution => @contribution}
+= render :partial => "received_display"
 
-%p
-  %h3 Received
-  = @contribution.received_at ? time_ago_in_words(@contribution.received_at) : "Not received"
+.business
+  = render :partial => 'businesses/display', :locals => {:business => @business}
 
-%p
-  = link_to "Edit", edit_admin_contribution_path(@contribution)
-  |
-  = link_to "View All", admin_contributions_path

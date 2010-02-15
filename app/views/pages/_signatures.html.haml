@@ -1,0 +1,23 @@
+.vcard#hcard-Shelley-Long
+  .fn Shelley Long
+  .org MGSH Class Party Prize Committee
+  .adr
+    .street-address 8656 Sycamore Ln N
+    %span.locality> Maple Grove
+    ,
+    %span.region MN
+    %span.postal-code 55369-9192
+  .tel= number_to_phone 7634202992
+  = mail_to "Shelley@MGSHParty.com", nil, :subject => "My Contribution", :class => :email
+  
+.vcard#hcard-Kristen-Laursen
+  .fn Kristen Laursen
+  .org MGSH Class Party Prize Committee
+  .adr
+    .street-address 12147 94th Ave N
+    %span.locality> Maple Grove
+    ,
+    %span.region MN
+    %span.postal-code 55369-7155
+  = mail_to "Kristen@MGSHParty.com", nil, :subject => "My Contribution", :class => :email
+.clear

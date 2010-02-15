@@ -1,6 +1,14 @@
-@import colors
 !primary_color = #ffffff
 !background_color = #000000
+!color1 = #ff7f7f
+!color1_dark = #660000
+!color2 = #bfff7f
+!color2_dark = #336600
+!color3 = #7fffff
+!color3_dark = #006666
+!color4 = #bf7fff
+!color4_dark = #330066
+
 
 body
   :background-color = !background_color
@@ -10,9 +18,13 @@ body
   :color = !primary_color
 
 a
-  :color = !primary_color
-  img
-    :border none
+  :color = !color3
+
+// Google talk autolinks
+.gc-cs-link
+  :color = !color2 "!important"
+.gc-cs-content
+  :color black
     
 form.formtastic
   fieldset
@@ -35,18 +47,18 @@ table
   :padding 80px 20px 20px 20px
       
 #infobar
-  :background-color #006b93   
+  :background-color = !color1_dark
   :position fixed
   :top 0
   :left 0
   :width 100%
   :height 40px
-  :border-color #0090c5
+  :border-color = !color3_dark
   :border-bottom
     :width 5px
     :style solid
   h1
-    :background-color #006b93 
+    :background-color = !color1_dark
     :font-size 28px
     :float left
     :margin 0
@@ -54,7 +66,7 @@ table
     :height 40px
     :border
       :style groove
-      :color #0090c5
+      :color = !color3_dark
       :width 0 8px 8px 0
       
 menu#actions, menu#nav
@@ -76,15 +88,15 @@ menu#actions, menu#nav
       :text-decoration none
       &:hover
         :background-color = !primary_color
-        :color #006b93 
+        :color = !color1_dark
 menu#actions
   :color = !primary_color
   a
     :color = !primary_color
 menu#nav
-  :color = !primary_color - #691800
+  :color = !color2
   a
-    :color = !primary_color - #691800
+    :color = !color2
     
 #userinfo
   :float right
@@ -92,3 +104,6 @@ menu#nav
   
 #search_box
   :float right
+  
+.business, .contribution
+  :margin-bottom 20px

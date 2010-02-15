@@ -1,0 +1,24 @@
+- content_for :head do
+  %link{:rel => :alternate, :type => 'application/pdf', :href => "/letter.pdf"}
+
+%p This letter was sent out to Maple Grove businesses mid&#8209;February of this year.
+
+#letter
+  :textile
+    Dear Community Member:
+
+    The Maple&nbsp;Grove&nbsp;Senior&nbsp;High&nbsp;Graduation&nbsp;Party&nbsp;Committee sponsors an all&#8209;night&nbsp;party each year to give the graduates a fun and safe evening to celebrate after their commencement exercises. The party includes food, entertainment, prizes, and a gift for each of the students and will be held this year on Sunday,&nbsp;June&nbsp;13,&nbsp;2010.
+
+    The Graduation&nbsp;Party&nbsp;Committee is looking for support from local organizations for the 2010&nbsp;all&#8209;night&nbsp;party. The success of this event depends on funding from local businesses, community organizations, and families of the graduates. Your contribution can be in the form of cash, gift certificates, or merchandise and will help to make the evening a memorable event for the graduates and their families.
+
+    Please consider a contribution to the 2010&nbsp;Maple&nbsp;Grove&nbsp;Senior&nbsp;High celebration and visit the "website":http://www.mgshparty.com/contribute or complete the enclosed response card to indicate your cash, merchandise, or gift certificate donation. If you choose to send a check, please make it payable to _Maple&nbsp;Grove Senior&nbsp;High&nbsp;Class&nbsp;Party&nbsp;(MGSCP)_ and mail it to the address on the response card. If your donation requires a pick&#8209;up, please indicate so, and a committee member will contact you to make arrangements. Your gift may be tax&#8209;deductible and a receipt will be provided for your tax records. All contributors will be recognized with an attribution in the local newspaper. We would appreciate your reply by February&nbsp;28,&nbsp;2010.
+
+    We are grateful for any support you can offer and would like to thank you on behalf of the Graduating&nbsp;Class&nbsp;of&nbsp;2010 for your consideration of our request. Please feel free to contact us with any questions you may have.
+
+    Sincerely,
+    
+
+  #signatures= render :partial => 'signatures'
+
+%p= link_to "This letter as PDF", "letter.pdf"
+%p= link_to "Back", contribute_path

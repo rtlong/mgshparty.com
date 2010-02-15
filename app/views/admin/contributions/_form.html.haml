@@ -1,4 +1,4 @@
-- semantic_form_for [:admin, @contribution] do |f|
+- semantic_form_for @contribution, :url => admin_business_contribution_path(@business) do |f|
   - f.inputs "Contribution" do
     = f.input :nature, :label => "Nature", :hint => "What is the donation?"
     = f.input :value,  :label => "Approximate Value", :hint => "What is the value?"
@@ -10,7 +10,7 @@
     = f.input :message, :label => "Message", :input_html => {:rows => 5}
     
     - f.inputs "Received" do
-      = f.input :received, :label => "Was it?", :as => :boolean
+      = f.input :received, :label => "Was it received?", :as => :boolean
       = f.input :received_at, :label => "When?"
     
   - f.buttons do

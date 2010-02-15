@@ -7,10 +7,21 @@ body
     :size 14px
   :padding 0
   :margin 0
+  :color black
 a
   :color = !primary_color
   img
     :border none
+    
+// Google talk autolinks
+.gc-cs-link
+  :color = !primary_color "!important"
+.gc-cs-content
+  :color black
+
+#review
+  :border = "solid" "2px" !primary_color
+  :padding 20px
 
 .clear
   :clear both
@@ -28,7 +39,7 @@ a
 
 #container
   :width 750px
-  :margin 0 auto
+  :margin 0 auto 20px auto
   :background #fff
   
   #content
@@ -116,4 +127,23 @@ h1, h2, h3, h4, h5, h6
     :display inline
     :font-size 50%
 
-
+.contacts
+  :margin 10px
+  .vcard
+    :border-left 2px solid black
+    :margin
+      :bottom 15px
+    :padding-left 5px
+.vcard
+  .fn
+    :font-weight bold
+    :font-size 120%
+#signatures
+  .vcard
+    :float left
+    :margin-right 30px
+#letter
+  :text-align justify
+  :text-justify inter-word 
+  :padding 0.5in
+  :border 1px solid #888

@@ -15,12 +15,13 @@
     .note #{@responded_businesses.count} businesses
   %table
     %tr
-      %th{:width => '2%'} M
+      %th.centered{:width => '2%'}
+        %abbr{:title => "Needs to be mailed"} M
       %th{:width => '25%'} Name
       %th{:width => '25%'} Location
       %th{:width => '15%'} Date Responded
       %th{:width => '*'} Contribution
-      %th{:width => '2%'}
+      %th{:width => '15%'} Date Received
     - @responded_businesses.group_by(&:name).each_pair do |business_name, locations| 
       - cycle('even', 'odd')
       - locations.each do |business|
@@ -31,14 +32,13 @@
               = observe_field "business_#{business.id}_mailing_required", :url => admin_business_url(business.id, :format => :js), :method => :put, :with => "'business[mailing_required]=' + value"
             %td= h business.name
             %td= link_to( business.street, admin_business_path(business) )
-            - if business.responded_at?
-              %td= time_ago_in_words(business.responded_at)
+            %td= time_ago_in_words(business.responded_at)
             %td
               - if business.contribution
-                = link_to( business.contribution.nature, admin_contribution_path(business.contribution) )
+                = link_to( business.contribution.nature, admin_business_contribution_path(business) )
             %td
               - if business.contribution.received
-                = image_tag "check.gif"
+                = business.contribution.received_at.to_words
             
             
 - unless @other_businesses.empty?
@@ -47,7 +47,8 @@
     .note #{@other_businesses.count} businesses
   %table
     %tr
-      %th{:width => '1%'} M
+      %th.centered{:width => '1%'}
+        %abbr{:title => "Needs to be mailed"} M
       %th{:width => '25%'} Name
       %th Location
     - @other_businesses.each_with_index do |business, i|

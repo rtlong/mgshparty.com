@@ -1,7 +1,10 @@
 - title 'Contribute'
 - centered
 
-%h1 Thank you for responding to our letter. 
+%h1 
+  Thank you for responding to our letter
+  %sup.note>= link_to_function "?", 'flash_message();', :title => "Didn't get a letter?"
+  
 %h2 Please tell us about your contribution using the following form.
 
 - form_for @business, :url => {:controller => :businesses, :action => :new} do |f|
@@ -19,5 +22,16 @@
       %th{:width => '20%'} City
   %tbody#business_name_results
   
-  
 = observe_field 'business_name', :frequency => 0.25, :url => search_businesses_path(:js), :with => 'name', :before => "$('business_name').className = 'loading'", :complete => "$('business_name').className = ''", :condition => "$('business_name').value.length >= 2"
+
+%p.message#message
+  Didn't get a letter? 
+  = link_to "Read it here.", letter_path
+  
+- javascript_tag do
+  :escaped
+    function flash_message(){
+      Effect.Shake('message');
+      new Effect.Highlight('message', { endcolor: '#ffffff', startcolor: '#e06d6d', duration: 4});
+    }
+

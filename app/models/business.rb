@@ -18,7 +18,6 @@ class Business < ActiveRecord::Base
   validates_format_of :street, :with => /\A#{Addressing::STREET_PATTERN.source}\s+#{Addressing::SECONDARY_UNIT_PATTERN.source}\Z/i
   validates_format_of :street2, :with => Addressing::SECONDARY_UNIT_PATTERN, :allow_blank => true
   
-  
   default_scope :order => 'name'
   
   named_scope :search, lambda{ |*args|
@@ -86,5 +85,9 @@ class Business < ActiveRecord::Base
     zip, plus4 = Addressing::ZIP_PATTERN.match(zip.to_s)[1..2]
     self[:zip] = zip.to_i
     self[:zip4] = plus4 ? plus4.to_i : nil
+  end
+  
+  def has_contact_info?
+    contact_name? or contact_email? or contact_phone? or contact_department?
   end
 end
