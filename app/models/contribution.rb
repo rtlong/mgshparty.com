@@ -10,7 +10,7 @@ class Contribution < ActiveRecord::Base
   belongs_to :business  
   accepts_nested_attributes_for :business
 
-  validates_presence_of :nature, :value, :delivery_method, :message => "Required"
+  validates_presence_of :nature, :value, :delivery_method, :business_id, :message => "Required"
   validates_presence_of :delivery_details, :message => "Please explain the details of how we will get the contribution", :if => Proc.new { |c| c.delivery_method == :other }
   
   named_scope :received, :condition => 'received_at IS NOT NULL'
