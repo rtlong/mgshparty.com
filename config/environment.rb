@@ -7,7 +7,7 @@ ENV['GEM_PATH'] = '/home/me2000r/.gems:/usr/lib/ruby/gems/1.8'
 #RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 if File.exist?("tmp/restart.txt")
-  LAST_UPDATE_TIME = File.new("tmp/restarttxt").mtime
+  LAST_UPDATE_TIME = File.new("tmp/restart.txt").mtime
 else
   LAST_UPDATE_TIME = Time.now
 end
