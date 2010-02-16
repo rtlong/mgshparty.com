@@ -22,7 +22,7 @@ module ContributionsHelper
     when :mail, :pickup
       [DELIVERY_METHODS_DESCRIPTIONS[contribution.delivery_method.to_sym], contribution.delivery_details].compact.join ", "
     when :other
-      "it will get to you in the following method: #{contribution.delivery_details.strip}"
+      "it will get to you in the following method: #{(contribution.delivery_details || 'undefined').strip}"
     end
   end
 end

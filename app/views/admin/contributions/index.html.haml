@@ -14,12 +14,15 @@
       %th{:colspan => 6} #{@contributions.count} Contributions
   %tbody
     - for contribution in @contributions
-      - content_tag_for :tr, contribution, :class => cycle('even','odd') do
+      %tr[contribution]{:class => cycle('even','odd')}
         %td= link_to contribution.nature, admin_business_contribution_path(contribution.business)
         %td= contribution.value
         %td= link_to contribution.business.name, admin_business_path(contribution.business)
-        %td= delivery_method_display(contribution)
-        %td.received_at
+        %td.delivery<
+          %span.method>= contribution.delivery_method.to_s.humanize
+          - if contribution.delivery_details?
+            %span.details> : #{contribution.delivery_details} 
+        %td.received_at<
           - if contribution.received?
             = contribution.received_at.to_words
           - else
