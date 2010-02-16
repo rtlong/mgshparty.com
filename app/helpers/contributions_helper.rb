@@ -19,8 +19,7 @@ module ContributionsHelper
   
   def delivery_method_display(contribution)
     case contribution.delivery_method.to_sym
-    when :mail
-    when :pickup
+    when :mail, :pickup
       [DELIVERY_METHODS_DESCRIPTIONS[contribution.delivery_method.to_sym], contribution.delivery_details].compact.join ", "
     when :other
       "it will get to you in the following method: #{contribution.delivery_details.strip}"

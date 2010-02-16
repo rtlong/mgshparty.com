@@ -221,8 +221,9 @@ module Addressing
   TLD_PATTERN = /a(?:ero|(?:rp|si)a|[cdefgilmnoqrstuwxz])|b(?:iz|[abdefghijmnorstwyz])|c(?:at|o(?:m|op)|[acdfghiklmnoruvxyz])|d[ejkmoz]|e(?:du|[cegrstu])|f[ijkmor]|g(?:ov|[adefghilmnpqrstuwy])|h[kmnrtu]|i(?:n(?:fo|t|[delmnoqrst]))|j(?:obs|[emop])|k[eghimnprwyz]|l[abcikrstuvy]|m(?:il|obi|useum|[acdeghklmnopqrstuvwxyz])|n(?:ame|et|[acefgilopruz])|o(?:m|rg)|p(?:ro|[aefghklmnrstwy])|qa|r[eosuw]|s[abcdeghiklmnrtuvyz]|t(?:(?:rav)?el|[cdfghjklmnoprtvwz])|u[agksyz]|v[aceginu]|w[fs]|y[etu]|z[amw]/ # this expression defines all current legal TLDs
   DOMAIN_PATTERN = /(?:[[:alnum:]](?:\-?[[:alnum:]]){0,62}\.)+(?:#{TLD_PATTERN.source})/ # this matches any legal domain name
   IP_ADDRESS_PATTERN = /(?:2(?:5[0-5]|[0-4][0-9])|[01]?[0-9]{1,2})(?:\.(?:2(?:5[0-5]|[0-4][0-9])|[01]?[0-9]{1,2})){3}/ # this matches any legal ip address
-  EMAIL_PATTERN = /^(#{EMAIL_USER_PATTERN.source})@(#{DOMAIN_PATTERN.source}|\[#{IP_ADDRESS_PATTERN.source}\])$/ # this matches any legal email address  
+  EMAIL_PATTERN = /\A(#{EMAIL_USER_PATTERN.source})@(#{DOMAIN_PATTERN.source}|\[#{IP_ADDRESS_PATTERN.source}\])\Z/ # this matches any legal email address  
   
   PHONE_PATTERN = /\A(?:\(\d{3}\)|\d{3})[-.\s]?(?!555)\d{3}[-.\s]?\d{4}(?:\s*(?:x|ext?\.?)\s*[-\s\dP*#]*)?\Z/
+  #PHONE_PATTERN = /\A[[:alnum:]]\Z/
 end
 

@@ -4,17 +4,19 @@
   %head
     %title #{h(yield(:title) || "Untitled")} - MGSHParty.com
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    %meta{:name => :language, :content => :en}
+    %meta{:name => :revised, :content => LAST_UPDATE_TIME.strftime("%d/%m/%Y")}
     = javascript_include_tag :all
     = stylesheet_link_tag 'formtastic', 'application'
     /[if IE]
-      = stylesheet_link_tag 'ie'
+      = stylesheet_link_tag 'static/ie'
     %link{:rel => 'profile', :href=> "http://microformats.org/profile/hcard"}
     = yield(:head)
   
   %body
-    #container{ :class => @centered ? "centered" : nil}
+    #container
       #header= image_tag "http://www.district279.org/sec/mgsh/images/headers/MGSH_thin.png"
-      #content
+      #content{ :class => @centered ? "centered" : nil}
         - flash.each do |name, msg|
           = content_tag :div, msg, :id => "flash_#{name}"
         
@@ -22,3 +24,11 @@
           %h1=h yield(:title)
         
         = yield
+        
+      #footer
+        .note
+          Please #{mail_to("webmaster@mgshparty.com", "contact the webmaster")} regarding any problems.
+        
+        .updated Last updated #{LAST_UPDATE_TIME.strftime("%d %b %Y")}
+        
+        .host This website is hosted by <a href="http://www.dreamhost.com/r.cgi?338167">Dreamhost</a>

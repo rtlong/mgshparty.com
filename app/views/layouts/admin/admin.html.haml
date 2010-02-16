@@ -26,9 +26,11 @@
           Logged in as <strong>#{current_user.username}</strong>.
           = link_to "Log Out", admin_logout_path  
 
-    .content
+    #content
       - flash.each do |name, msg|
         %div{:id => "flash_#{name}"}= msg
 
       = yield
 
+    #footer
+      This administrative interface was designed to work with standards-compliant browsers such as Google Chrome, Mozilla Firefox, Opera, and Apple Safari

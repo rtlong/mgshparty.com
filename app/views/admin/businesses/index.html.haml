@@ -22,23 +22,20 @@
       %th{:width => '15%'} Date Responded
       %th{:width => '*'} Contribution
       %th{:width => '15%'} Date Received
-    - @responded_businesses.group_by(&:name).each_pair do |business_name, locations| 
-      - cycle('even', 'odd')
-      - locations.each do |business|
-        - fields_for "business[]", business do |f|
-          - content_tag_for :tr, business, :class => current_cycle do
-            %td
-              = f.check_box :mailing_required
-              = observe_field "business_#{business.id}_mailing_required", :url => admin_business_url(business.id, :format => :js), :method => :put, :with => "'business[mailing_required]=' + value"
-            %td= h business.name
-            %td= link_to( business.street, admin_business_path(business) )
-            %td= time_ago_in_words(business.responded_at)
-            %td
-              - if business.contribution
-                = link_to( business.contribution.nature, admin_business_contribution_path(business) )
-            %td
-              - if business.contribution.received
-                = business.contribution.received_at.to_words
+    - @responded_businesses.each_with_index do |business, i| 
+      %tr{:class => ['even', 'odd'][i % 2], :id => "business_#{business.id}"}
+        %td
+          = check_box_tag "b#{business.id}_mr", 1, business.mailing_required
+          = observe_field "b#{business.id}_mr", :url => "/admin/businesses/#{business.id}.js", :method => :put, :with => "'business[mailing_required]=' + value"
+        %td= h business.name
+        %td= link_to( business.street, admin_business_path(business) )
+        %td= time_ago_in_words(business.responded_at)
+        %td
+          - if business.contribution
+            = link_to( business.contribution.nature, admin_business_contribution_path(business) )
+        %td
+          - if business.contribution and business.contribution.received
+            = business.contribution.received_at.to_words
             
             
 - unless @other_businesses.empty?

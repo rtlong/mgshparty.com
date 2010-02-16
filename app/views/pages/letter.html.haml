@@ -18,7 +18,10 @@
     Sincerely,
     
 
-  #signatures= render :partial => 'signatures'
+  #signatures
+    = render :partial => 'shelley'
+    = render :partial => 'kristen'
+    .clear
 
 %p= link_to "This letter as PDF", "letter.pdf"
 %p= link_to "Back", contribute_path

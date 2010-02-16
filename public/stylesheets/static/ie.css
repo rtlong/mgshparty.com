@@ -4,5 +4,8 @@ form.formtastic fieldset.address li.city, form.formtastic fieldset.address li.st
 }
 
 #message{
-  width:100%
+  width: 100%;
+}
+#letter{
+  visiblity: visible;
 }

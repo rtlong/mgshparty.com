@@ -1,8 +1,8 @@
 page << <<END
-if(el = $$('#contribution_#{@contribution.id} td.received_at')){
-  el.first().update('Today');
+if(el = $$('#contribution_#{@contribution.id} td.received_at').first()){
+  el.update('Today');
 }
 if(el = $('received_at')){
-  el.update('It was received today.');
+  el.update('It was received today');
 }
 END

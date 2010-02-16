@@ -34,7 +34,7 @@ class BusinessesController < ApplicationController
     @business = Business.new(params[:business])
     @business.responded_at = Time.now
     if @business.save
-      flash[:notice] = "Successfully created business."
+      flash[:notice] = "Successfully added business info."
       redirect_to new_business_contribution_path(@business)
     else
       render :action => 'confirm'
@@ -58,7 +58,7 @@ class BusinessesController < ApplicationController
     @business.responded_at ||= Time.now
     @business.save
     if @business.update_attributes(params[:business])
-      flash[:notice] = "Successfully updated business."
+      flash[:notice] = "Successfully updated business info."
       redirect_to new_business_contribution_path(@business)
     else
       render :action => 'confirm'

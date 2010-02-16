@@ -1,9 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  def admin_link_to(link_text, link_object)
+  def link_to_if_logged_in(link_text, *link_params)
     if logged_in?
-      link_to link_text, [:admin, link_object]
+      link_to link_text, *link_params
     else
       link_text
     end

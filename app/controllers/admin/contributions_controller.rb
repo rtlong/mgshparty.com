@@ -23,9 +23,9 @@ class Admin::ContributionsController < Admin::AdminController
   
   def create
     if (params['contribution']['received'] != '1')
-      params['contribution'].merge!('received_at(1i)' => '', 'received_at(2i)' => '', 'received_at(3i)' => '') 
-      params['contribution'].delete 'received'
+      params['contribution'].merge!('received_at(1i)' => '', 'received_at(2i)' => '', 'received_at(3i)' => '')
     end
+    params['contribution'].delete 'received'
     
     @contribution = @business.build_contribution(params[:contribution])
     if @contribution.save
@@ -47,9 +47,9 @@ class Admin::ContributionsController < Admin::AdminController
     @contribution = @business.contribution
     
     if (params['contribution']['received'] != '1')
-      params['contribution'].merge!('received_at(1i)' => '', 'received_at(2i)' => '', 'received_at(3i)' => '') 
-      params['contribution'].delete 'received'
+      params['contribution'].merge!('received_at(1i)' => '', 'received_at(2i)' => '', 'received_at(3i)' => '')
     end
+    params['contribution'].delete 'received'
     
     success = @contribution.update_attributes(params[:contribution])
     

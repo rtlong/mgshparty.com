@@ -4,7 +4,7 @@
   :textile
     h1. Thank you, we appreciate your contribution and your response.
 
-    p. If you need to change or review any of the information here in the future, the "current url":#{business_contribution_url(@contribution.business)} will bring you back here. You can also go to the main "contribute":/contribute url you first went to.
+    p. If you need to change or review any of the information here in the future, you can bookmark "this page":#{business_contribution_url(@contribution.business)}. You could also go back to the main "contribute":/contribute page and look up your business again.
 
 #review
   Here is a review of what you have submitted.
@@ -17,10 +17,17 @@
 
 #closing.message
   :textile
-    p. _Please make checks payable to *Maple Grove Senior High Class Party (MGSHCP)*._
+    _Please make checks payable to *Maple Grove Senior High Class Party (MGSHCP)*._
     
-    p. If you need to contact the prize committee, please feel free to send any questions or concerns to either of the committee chairs listed below.
+    If you need to contact the prize committee, #{link_to_function( "click here", "show_contacts();" )}.
     
-  .contacts
-    = render :partial => "pages/signatures"
-      
+  #contacts
+    %p Please feel free to send any questions or concerns to Shelley, the committee chair, listed below.
+    = render :partial => "pages/shelley"
+    
+:javascript
+  // hide via js so it will be accessible for folks w/o js
+  $('contacts').hide();
+  function show_contacts(){
+    $('contacts').show();
+  }

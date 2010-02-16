@@ -1,4 +1,4 @@
-%h2 Contribution
+%h2= link_to_if_logged_in "Contribution", admin_business_contribution_path(contribution.business)
 
 %p
   :textile

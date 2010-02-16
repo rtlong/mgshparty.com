@@ -5,15 +5,7 @@
 
 
 - semantic_form_for @contribution, :url => business_contribution_path(@contribution.business) do |f|
-  - f.inputs "Contribution" do
-    = f.input :nature, :label => "Nature", :hint => "What is the nature of your donation?"
-    = f.input :value,  :label => "Approximate Value", :hint => "What is the value of your donation?"
-        
-    - f.inputs "Delivery" do
-      = f.input :delivery_method, :label => "How will your donation get to us?", :as => :radio, :collection => delivery_methods_collection
-      = f.input :delivery_details, :label => "Details", :input_html => {:rows => 3}, :hint => "Any details regarding the above mode of delivery"
-    
-    = f.input :message, :label => "Message", :hint => "If there is anything else you'd like to tell us abut your contribution, do it here.", :input_html => {:rows => 5}
+  = render :partial => "fields", :locals => {:f => f}
     
   - f.buttons do
     = f.commit_button "Save"

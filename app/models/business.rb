@@ -9,14 +9,14 @@ class Business < ActiveRecord::Base
   belongs_to :business_type
   
   validates_uniqueness_of :name, :scope => [:street, :city], :case_sensitive => false, :message => "This business already has an entry in the datebase for this location. Please go to the previous page to select the business entry."
-  validates_presence_of :name, :business_type, :phone, :street, :city, :state, :zip
+  validates_presence_of :name, :business_type, :street, :city, :state, :zip
   validates_format_of :zip, :with => /\A#{Addressing::ZIP_PATTERN.source}\Z/, :message => "ZIP Code doesn't appear valid. Should be ##### or #####-####" 
-  validates_format_of :phone, :with => Addressing::PHONE_PATTERN
-  validates_format_of :contact_phone, :with => Addressing::PHONE_PATTERN, :allow_blank => true
-  validates_format_of :contact_email, :with => Addressing::EMAIL_PATTERN, :allow_blank => true
-  validates_format_of :city, :with => Addressing::CITY_PATTERN
-  validates_format_of :street, :with => /\A#{Addressing::STREET_PATTERN.source}\s+#{Addressing::SECONDARY_UNIT_PATTERN.source}\Z/i
-  validates_format_of :street2, :with => Addressing::SECONDARY_UNIT_PATTERN, :allow_blank => true
+  #validates_format_of :phone, :with => Addressing::PHONE_PATTERN, :allow_blank => true, :message => "That phone number appears invalid."
+  #validates_format_of :contact_phone, :with => Addressing::PHONE_PATTERN, :allow_blank => true, :message => "That phone number appears invalid."
+  validates_format_of :contact_email, :with => Addressing::EMAIL_PATTERN, :allow_blank => true, :message => "That email does not appear valid."
+  validates_format_of :city, :with => Addressing::CITY_PATTERN, :message => "Please enter a valid US city name"
+  validates_format_of :street, :with => Addressing::STREET_PATTERN, :message => "Please enter a valid US mailing address"
+  validates_format_of :street2, :with => Addressing::SECONDARY_UNIT_PATTERN, :allow_blank => true, :message => "Please enter a valid US mailing address"
   
   default_scope :order => 'name'
   

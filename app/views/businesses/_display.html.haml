@@ -1,9 +1,9 @@
-%h2= admin_link_to(business.name, business)
+%h2= link_to_if_logged_in(business.name, admin_business_path(business))
 
 - if business.business_type_id?
   .business_type
     %strong Business Type: 
-    = admin_link_to(business.business_type.name, business.business_type)
+    = link_to_if_logged_in(business.business_type.name, admin_business_type_path(business.business_type))
     
 .phone
   %strong Phone Number: 

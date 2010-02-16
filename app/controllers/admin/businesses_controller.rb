@@ -12,7 +12,7 @@ class Admin::BusinessesController < Admin::AdminController
 
       format.csv do
         fields = [:id, :name, :contact_name, :contact_department, :street, :street2, :city, :state, :zip]
-        @businesses = Business.not_responded.all :conditions => :mailing_required, :order => :name, :select => fields.join(',')
+        @businesses = Business.not_responded.all :conditions => :mailing_required, :order => :zip, :select => fields.join(',')
         
         render :text => [ 
             fields.join(';'), 
