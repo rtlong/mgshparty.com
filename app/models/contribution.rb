@@ -2,7 +2,7 @@ class Contribution < ActiveRecord::Base
   strip_attributes!
   
   # DO NOT change the order of this!! See ContributionsHelper#delivery_methods_collection to change the display order
-  DELIVERY_METHODS = [ :mail, :deliver, :pickup, :other ].freeze
+  DELIVERY_METHODS = [ :mail, :pickup, :other ].freeze
   
   attr_accessible :nature, :value, :message, :delivery_method, :delivery_details, :received_at, :business_attributes
   #attr_accessor :received
@@ -11,8 +11,7 @@ class Contribution < ActiveRecord::Base
   accepts_nested_attributes_for :business
 
   validates_presence_of :nature, :value, :delivery_method, :message => "Required"
-  validates_inclusion_of :delivery_method, :in => DELIVERY_METHODS, :message => nil
-  validates_presence_of :delivery_details, :if => Proc.new { |contribution| contribution.delivery_method == :other }, :message => "Please explain the details of how we will get the contribution"
+  validates_presence_of :delivery_details, :message => "Please explain the details of how we will get the contribution", :if => Proc.new { |c| c.delivery_method == :other }
   
   named_scope :received, :condition => 'received_at IS NOT NULL'
   
@@ -32,7 +31,8 @@ class Contribution < ActiveRecord::Base
   end
     
   def delivery_method=(method)
-    self[:delivery_method] = DELIVERY_METHODS.index method.to_sym
+    method = DELIVERY_METHODS.index method.to_sym
+    self[:delivery_method] = method if method
   end
   
   def value

@@ -33,7 +33,7 @@ module ApplicationHelper
     lines = %w( REMOTE_ADDR REMOTE_HOST REQUEST_URI HTTP_USER_AGENT HTTP_REFERER ).collect do |var|
       [var, request.env[var]].join(": ")
     end
-    body = "\n\n\n\nThe following info will be helpful for the wobmaster to assist you. Please leave it in the email.\n"
+    body = "\n\n\n\nThe following info will be helpful for the webmaster to assist you. Please leave it in the email.\n"
     body << lines.join("\n")
   end
 end
