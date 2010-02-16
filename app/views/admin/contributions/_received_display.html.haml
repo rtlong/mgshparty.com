@@ -3,4 +3,4 @@
     It was received #{@contribution.received_at.to_words.downcase}
   - else
     It has not yet been received.
-    = link_to_remote "Mark as received today.", :url => {:action => :mark_received, :business_id => @business.id}
+    = link_to_remote "Mark as received today.", :url => mark_received_admin_business_contribution_path(@business.id)

@@ -4,14 +4,13 @@
   = render :partial => 'businesses/display', :locals => {:business => @business}
 
   - if @business.responded_at
-    %div 
-      %h3 Response
-      received #{time_ago_in_words(@business.responded_at)}
+    .responded_at
+      %h3 Responded #{time_ago_in_words(@business.responded_at)}
 
 .contribution  
   - if @contribution
     = render :partial => 'contributions/display', :locals => {:contribution => @contribution}
-    = render :partial => 'admin/contributions/received_display'
   - else
+    %h2 Contribution
     .note= link_to "Add Contribution", new_admin_business_contribution_path(@business)
 

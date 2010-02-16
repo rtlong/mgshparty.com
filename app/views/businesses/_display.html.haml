@@ -5,9 +5,10 @@
     %strong Business Type: 
     = link_to_if_logged_in(business.business_type.name, admin_business_type_path(business.business_type))
     
-.phone
-  %strong Phone Number: 
-  = number_to_phone(business.phone, :extension => business.phone_ext, :area_code => true)
+- if business.phone?
+  .phone
+    %strong Phone Number: 
+    = business.phone
   
 .address
   %h3 Address
@@ -33,7 +34,7 @@
     - if business.contact_phone?
       .phone 
         %strong Phone: 
-        = number_to_phone(business.contact_phone, :extension => business.contact_phone_ext, :area_code => true)
+        = business.contact_phone
     - if business.contact_email?
       .email
         %strong Email: 

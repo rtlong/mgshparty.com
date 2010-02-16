@@ -103,7 +103,30 @@ menu#nav
   :padding 10px
   
 #search_box
-  :float right
+  :position fixed
+  :background-color #444444
+  :top 50px
+  :right 0
+  :padding 5px
+  
+  .last_search
+    :font-size 75%
+  
+  input[type=text]
+    :padding 3px
+    
+.note
+  :font-size smaller
+  :font-style oblique
   
 .business, .contribution
   :margin-bottom 20px
+  
+#footer
+  :clear both
+  :padding
+    :top 10px
+    :right 20px
+    :left 20px
+  :border-top = "1px" "solid" !primary_color - #999
+  :color = !primary_color

@@ -1,7 +1,7 @@
 - title "All Businesses"
 
-- form_tag admin_businesses_path, :method => :get, :html => { :id => "search_form"} do
-  #search_box
+#search_box
+  - form_tag admin_businesses_path, :method => :get, :html => { :id => "search_form"} do
     = text_field_tag :q
     = submit_tag "Filter", :name => nil
     - if params[:q]
@@ -9,50 +9,68 @@
         You searched "#{params[:q]}"
         = link_to "[reset]", admin_businesses_path
 
-- unless @responded_businesses.empty?
+.responded_businesses
   %h2
     Responded
-    .note #{@responded_businesses.count} businesses
-  %table
-    %tr
-      %th.centered{:width => '2%'}
-        %abbr{:title => "Needs to be mailed"} M
-      %th{:width => '25%'} Name
-      %th{:width => '25%'} Location
-      %th{:width => '15%'} Date Responded
-      %th{:width => '*'} Contribution
-      %th{:width => '15%'} Date Received
-    - @responded_businesses.each_with_index do |business, i| 
-      %tr{:class => ['even', 'odd'][i % 2], :id => "business_#{business.id}"}
-        %td
-          = check_box_tag "b#{business.id}_mr", 1, business.mailing_required
-          = observe_field "b#{business.id}_mr", :url => "/admin/businesses/#{business.id}.js", :method => :put, :with => "'business[mailing_required]=' + value"
-        %td= h business.name
-        %td= link_to( business.street, admin_business_path(business) )
-        %td= time_ago_in_words(business.responded_at)
-        %td
-          - if business.contribution
-            = link_to( business.contribution.nature, admin_business_contribution_path(business) )
-        %td
-          - if business.contribution and business.contribution.received
-            = business.contribution.received_at.to_words
+    - unless @responded_businesses.empty?
+      .note #{@responded_businesses.count} businesses
+  - if @responded_businesses.empty?
+    .no-results There are no businesses that have responded and match your filter.
+  - else
+    .note These are the businesses that actually responded using the website AND businesses that have a contribution filed. If their response was added via this interface, they will not appear here unless a contribution was added as well.
+    %table
+      %thead
+        %tr
+          %th.centered{:width => '1%'}
+            %abbr{:title => "Needs to be mailed"} M
+          %th{:width => '25%'} Name
+          %th{:width => '25%'} Location
+          %th{:width => '15%'} Date Responded
+          %th{:width => '*'} Contribution
+          %th{:width => '15%'} Date Received
+      %tfoot
+        %tr
+          %th{:colspan => 6} #{@responded_businesses.count} businesses
+      %tbody
+        - @responded_businesses.each_with_index do |business, i| 
+          %tr{:class => ['even', 'odd'][i % 2], :id => "business_#{business.id}"}
+            %td
+              = check_box_tag "b#{business.id}_mr", 1, business.mailing_required
+              = observe_field "b#{business.id}_mr", :url => "/admin/businesses/#{business.id}.js", :method => :put, :with => "'business[mailing_required]=' + value"
+            %td= h business.name
+            %td= link_to( business.street, admin_business_path(business) )
+            %td= time_ago_in_words(business.responded_at)
+            %td
+              - if business.contribution
+                = link_to( business.contribution.nature, admin_business_contribution_path(business) )
+            %td
+              - if business.contribution and business.contribution.received
+                = business.contribution.received_at.to_words
             
-            
-- unless @other_businesses.empty?
+.other_businesses            
   %h2
     Not Responded
-    .note #{@other_businesses.count} businesses
-  %table
-    %tr
-      %th.centered{:width => '1%'}
-        %abbr{:title => "Needs to be mailed"} M
-      %th{:width => '25%'} Name
-      %th Location
-    - @other_businesses.each_with_index do |business, i|
-      %tr{:class => ['even', 'odd'][i % 2], :id => "business_#{business.id}"}
-        %td
-          = check_box_tag "b#{business.id}_mr", 1, business.mailing_required
-          = observe_field "b#{business.id}_mr", :url => "/admin/businesses/#{business.id}.js", :method => :put, :with => "'business[mailing_required]=' + value"
-        %td= h business.name
-        %td
-          %a{:href => "/admin/businesses/#{business.id}"}= business.street
+    - unless @other_businesses.empty?
+      .note #{@other_businesses.count} businesses
+  - if @other_businesses.empty?
+    .no-results There are no businesses that have not responded and match your filter.
+  - else
+    %table
+      %thead
+        %tr
+          %th.centered{:width => '1%'}
+            %abbr{:title => "Needs to be mailed"} M
+          %th{:width => '25%'} Name
+          %th Location
+      %tfoot
+        %tr
+          %th{:colspan => 3} #{@other_businesses.count} businesses
+      %tbody
+        - @other_businesses.each_with_index do |business, i|
+          %tr{:class => ['even', 'odd'][i % 2], :id => "business_#{business.id}"}
+            %td
+              = check_box_tag "b#{business.id}_mr", 1, business.mailing_required
+              = observe_field "b#{business.id}_mr", :url => "/admin/businesses/#{business.id}.js", :method => :put, :with => "'business[mailing_required]=' + value"
+            %td= h business.name
+            %td
+              %a{:href => "/admin/businesses/#{business.id}"}= business.street

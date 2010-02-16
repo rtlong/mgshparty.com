@@ -12,7 +12,26 @@ a
   :color = !primary_color
   img
     :border none
-    
+
+blockquote
+  :border-left 2px solid grey
+  :margin
+    :left 15px
+    :top 0
+  :padding
+    :left 10px
+    :top 5px
+    :bottom 5px
+  quotes: "\201C" "\201D"
+  &:before
+    :content open-quote
+  &:after
+    :content close-quote
+  &:before, &:after
+    :font-weight bold
+    :font-size 300%
+    :color #666
+
 // Google talk autolinks
 .gc-cs-link
   :color = !primary_color "!important"
@@ -49,15 +68,15 @@ a
   #header
     :margin-bottom -3px
     
-  #footer
-    :text-align left
-    :color #444444
-    :font-size 10px
-    :margin-top 5px
-    
-    .note
-      :text-align right
-      :float right
+#footer
+  :text-align left
+  :color #444444
+  :font-size 80%
+  :margin-top 5px
+  
+  .note
+    :text-align right
+    :float right
 
 #flash_notice,
 #flash_error

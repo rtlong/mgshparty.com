@@ -30,9 +30,9 @@ class Admin::BusinessesController < Admin::AdminController
   end
 
   def new
-    @actions.push ["Cancel", {:action => 'show'}]
+    @actions.push ["Cancel", {:action => 'index'}]
     
-    @business = Business.new
+    @business = Business.new :city => "Maple Grove", :state => "MN", :zip => "55369"
   end
   
   def create

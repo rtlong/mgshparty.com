@@ -1,7 +1,7 @@
 - f.inputs "Business" do
   = f.input :name, :label => 'Name'
   = f.input :business_type, :label => "Type", :hint => "In to which of these does your business best fit?"
-  = f.input :phone, :label => 'Phone', :hint => "ex. 763-555-2135 x123. Please translate any letters to digits, so 763-555-TAXI becomes 763-555-8294"
+  = f.input :phone, :label => 'Phone', :as => :string, :input_html => {:value => @business.phone}, :hint => "ex. 763-555-2135 x123. Please translate any letters to digits, so 763-555-TAXI becomes 763-555-8294"
 
 - f.inputs "Address", :class => 'address' do
   = f.input :street,  :label => 'Street',   :wrapper_html => { :class => 'street'}
@@ -14,5 +14,5 @@
   %p Please tell us how to contact you.
   = f.input :contact_name, :label => 'Name'
   = f.input :contact_department, :label => 'Department', :hint => 'If this information is neccessary in order for a mailing to get directly to you, please include your department'
-  = f.input :contact_phone, :label => 'Phone', :hint => "ex. 763-555-2135 x123. Please translate any letters to digits, so 763-555-TAXI becomes 763-555-8294"
+  = f.input :contact_phone, :label => 'Phone', :as => :string, :input_html => {:value => @business.contact_phone}, :hint => "ex. 763-555-2135 x123. Please translate any letters to digits, so 763-555-TAXI becomes 763-555-8294"
   = f.input :contact_email, :label => 'Email Address'

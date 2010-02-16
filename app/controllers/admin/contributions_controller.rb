@@ -2,7 +2,7 @@ class Admin::ContributionsController < Admin::AdminController
   before_filter :set_actions
   before_filter :get_business, :except => :index
   def index
-    @contributions = Contribution.all :include => :business, :order => 'received_at DESC, created_at DESC'
+    @contributions = Contribution.all :include => :business, :order => 'created_at DESC'
   end
 
   def show
@@ -29,6 +29,7 @@ class Admin::ContributionsController < Admin::AdminController
     
     @contribution = @business.build_contribution(params[:contribution])
     if @contribution.save
+      @business.update_attributes :responded_at => Time.now
       flash[:notice] = "Successfully added contribution."
       redirect_to admin_business_contribution_path(@business)
     else
@@ -52,7 +53,8 @@ class Admin::ContributionsController < Admin::AdminController
     params['contribution'].delete 'received'
     
     success = @contribution.update_attributes(params[:contribution])
-    
+    @business.responded_at ||= Time.now
+    @business.save
     if success
       flash[:notice] = "Successfully updated contribution."
     else

@@ -1,16 +1,17 @@
 class ContributionsController < ApplicationController
   def show
-    @contribution = Contribution.find_by_business_id params[:business_id]
+    @business = Business.find params[:business_id]
+    @contribution = @business.contribution
   end
   
   def new
-    business = Business.find params[:business_id]
-    @contribution = business.build_contribution
+    @business = Business.find params[:business_id]
+    @contribution = @business.build_contribution
   end
   
   def create
-    business = Business.find params[:business_id]
-    @contribution = business.create_contribution(params[:contribution])
+    @business = Business.find params[:business_id]
+    @contribution = @business.create_contribution(params[:contribution])
     if @contribution.save
       flash[:notice] = "Successfully created contribution."
       redirect_to :action => :show
@@ -20,11 +21,13 @@ class ContributionsController < ApplicationController
   end
   
   def edit
-    @contribution = Contribution.find_by_business_id params[:business_id]
+    @business = Business.find params[:business_id]
+    @contribution = @business.contribution
   end
   
   def update
-    @contribution = Contribution.find_by_business_id params[:business_id]
+    @business = Business.find params[:business_id]
+    @contribution = @business.contribution
     
     if @contribution.update_attributes(params[:contribution])
       flash[:notice] = "Successfully updated contribution."

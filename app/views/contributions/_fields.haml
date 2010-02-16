@@ -1,6 +1,6 @@
 - f.inputs "Contribution" do
   = f.input :nature, :label => "Nature", :hint => "What is the nature of your donation?"
-  = f.input :value,  :label => "Approximate Value", :hint => "What is the value of your donation?", :as => :string
+  = f.input :value,  :label => "Approximate Value", :hint => "What is the value of your donation?", :as => :string, :input_html => {:value => @contribution.value}
       
   - f.inputs "Delivery" do
     = f.input :delivery_method, :label => "How will your donation get to us?", :as => :radio, :collection => delivery_methods_collection

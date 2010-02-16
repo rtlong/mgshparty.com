@@ -1,22 +1,27 @@
 - title "Contributions"
 
 %table
-  %tr
-    %th Nature
-    %th Value
-    %th Business
-    %th Delivery
-    %th Received?
-    %th Date Responded
-  - for contribution in @contributions
-    - content_tag_for :tr, contribution, :class => cycle('even','odd') do
-      %td= link_to contribution.nature, admin_business_contribution_path(contribution.business)
-      %td= contribution.value
-      %td= link_to contribution.business.name, admin_business_path(contribution.business)
-      %td= delivery_method_display(contribution)
-      %td.received_at
-        - if contribution.received?
-          = contribution.received_at.to_words
-        - else
-          = link_to_remote "set", :url => {:action => :mark_received, :business_id => contribution.business.id}
-      %td= contribution.created_at.strftime("%d %b %Y")
+  %thead
+    %tr
+      %th Nature
+      %th Value
+      %th Business
+      %th Delivery
+      %th Received?
+      %th Date Responded
+  %tfoot
+    %tr
+      %th{:colspan => 6} #{@contributions.count} Contributions
+  %tbody
+    - for contribution in @contributions
+      - content_tag_for :tr, contribution, :class => cycle('even','odd') do
+        %td= link_to contribution.nature, admin_business_contribution_path(contribution.business)
+        %td= contribution.value
+        %td= link_to contribution.business.name, admin_business_path(contribution.business)
+        %td= delivery_method_display(contribution)
+        %td.received_at
+          - if contribution.received?
+            = contribution.received_at.to_words
+          - else
+            = link_to_remote "set", :url => {:action => :mark_received, :business_id => contribution.business.id}
+        %td= contribution.created_at.strftime("%d %b %Y")

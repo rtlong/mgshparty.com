@@ -4,7 +4,7 @@ class Contribution < ActiveRecord::Base
   # DO NOT change the order of this!! See ContributionsHelper#delivery_methods_collection to change the display order
   DELIVERY_METHODS = [ :mail, :deliver, :pickup, :other ].freeze
   
-  attr_accessible :business_id, :nature, :value, :message, :delivery_method, :delivery_details, :received_at, :business_attributes
+  attr_accessible :nature, :value, :message, :delivery_method, :delivery_details, :received_at, :business_attributes
   #attr_accessor :received
 
   belongs_to :business  

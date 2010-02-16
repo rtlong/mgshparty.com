@@ -4,8 +4,8 @@
   %head
     %title #{h(yield(:title) || "Untitled")} - MGSHParty.com
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
-    %meta{:name => :language, :content => :en}
-    %meta{:name => :revised, :content => LAST_UPDATE_TIME.strftime("%d/%m/%Y")}
+    %meta{:name => :language, :content => :en}/
+    %meta{:name => :revised, :content => LAST_UPDATE_TIME.strftime("%d/%m/%Y")}/
     = javascript_include_tag :all
     = stylesheet_link_tag 'formtastic', 'application'
     /[if IE]
