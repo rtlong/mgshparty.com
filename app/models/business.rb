@@ -93,6 +93,14 @@ class Business < ActiveRecord::Base
     self[:zip4] = plus4 ? plus4.to_i : nil
   end
   
+  def display_name
+    self[:name].blank? ? "[unnamed business]" : self[:name]
+  end
+
+  def street
+    self[:street].blank? ? "[invalid street address]" : self[:street]
+  end
+  
   def has_contact_info?
     contact_name? or contact_email? or contact_phone? or contact_department?
   end

@@ -225,6 +225,6 @@ module Addressing
 
 
   # This pattern is designed to ensure ten digits, with an optional '1' country digit at the beginning, are found, regardless of any other characters. It will not match if it finds an 'x' before 10 digits are matched
-  PHONE_PATTERN = /\A(?:[^\dx]*1)?(?:[^\dx]*\d){10}[^\d]*\Z/
+  PHONE_PATTERN = /\A(?:[^\dx]*1)?(?:[^\dx]*\d){10}.*\Z/
 end
 

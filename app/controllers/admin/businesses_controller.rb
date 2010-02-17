@@ -24,6 +24,7 @@ class Admin::BusinessesController < Admin::AdminController
   def show
     @actions.push ["Create New", {:action => 'new'}]
     @actions.push ["Edit", {:action => 'edit'}]
+    @actions.push ["Delete", {:action => 'destroy'}, {:confirm => "Are you sure? This business and its contribution, if it has one, will be destroyed.", :method=> 'delete'}]
     
     @business = Business.find params[:id], :include => :contribution
     @contribution = @business.contribution
@@ -54,8 +55,13 @@ class Admin::BusinessesController < Admin::AdminController
   
   def update
     @business = Business.find(params[:id])
-    @business.attributes = params[:business]
-    success = @business.save(false)
+    if request.xhr?
+      @business.attributes = params[:business]
+      # dont't validate on XmlHttpRequest
+      success = @business.save(false)
+    else
+      success = @business.update_attributes(params[:business])
+    end
     if success
       flash[:notice] = "Successfully updated business."
     else
@@ -71,6 +77,25 @@ class Admin::BusinessesController < Admin::AdminController
         end
       end
       format.js
+    end
+  end
+  
+  def destroy
+    @business = Business.find(params[:id])
+    @business.destroy
+    
+    respond_to do |format|
+      format.html do
+        redirect_to admin_businesses_path
+      end
+      format.js do
+        render :update do |page|
+          page.remove "business_#{@business.id}"  
+          page.alert "Removed business by the name of '#{@business.display_name}'"
+          page.call :set_totals
+          
+        end   
+      end
     end
   end
 

@@ -78,8 +78,12 @@ input,select,textarea
     :top = !input_padding_y
     :bottom = !input_padding_y
     
-input[type=radio],input[type=checkbox]
+input[type='radio'],input[type='checkbox']
   :padding 2px
+input[type='image']
+  :padding 0
+  :border none
+  :margin-bottom -6px
 
 select
   :padding

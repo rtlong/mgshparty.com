@@ -6,10 +6,18 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %meta{:name => :language, :content => :en}/
     %meta{:name => :revised, :content => LAST_UPDATE_TIME.strftime("%d/%m/%Y")}/
+    
+    %script{:src => "http://www.google.com/jsapi"}
+    :javascript
+      google.load("prototype", "1.6.0.3"); 
+      google.load("scriptaculous", "1.8.3");
+      var AUTH_TOKEN = #{form_authenticity_token.inspect};
     = javascript_include_tag :all
+    
     = stylesheet_link_tag 'formtastic', 'application', 'admin'
     /[if IE]
       = stylesheet_link_tag 'static/ie'
+      
     = yield(:head)
   
   %body

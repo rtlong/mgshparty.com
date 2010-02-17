@@ -41,11 +41,12 @@ table
       :border-color = !background_color
     td
       :border-color = !background_color + #555555
-    &.even
+      &.hi
+        :background-color = !background_color + #00ffff
+    &.a
       :background-color = !background_color + #333333
-    &.odd
-      :background-color = !background_color
-      
+    
+
 #content
   :padding 80px 20px 20px 20px
       
@@ -111,6 +112,11 @@ menu#nav
   :top 50px
   :right 0
   :padding 5px
+  
+  h5
+    :margin 0
+    :margin-left 2px
+      
   
   .last_search
     :font-size 75%
