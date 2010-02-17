@@ -12,7 +12,6 @@
     :javascript
       google.load("prototype", "1.6.0.3"); 
       google.load("scriptaculous", "1.8.3");
-      var AUTH_TOKEN = #{form_authenticity_token.inspect};
     = javascript_include_tag :all
     
     = stylesheet_link_tag 'formtastic', 'application'
