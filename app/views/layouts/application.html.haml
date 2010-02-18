@@ -7,12 +7,13 @@
     %meta{:name => :language, :content => :en}/
     %meta{:name => :revised, :content => LAST_UPDATE_TIME.strftime("%d/%m/%Y")}/
     %link{:rel => 'profile', :href=> "http://microformats.org/profile/hcard"}
-    
+
     %script{:src => "http://www.google.com/jsapi"}
     :javascript
       google.load("prototype", "1.6.0.3"); 
       google.load("scriptaculous", "1.8.3");
-    = javascript_include_tag :all
+      var AUTH_TOKEN = '#{form_authenticity_token}';
+    %script{:src => "/javascripts/application.js"}
     
     = stylesheet_link_tag 'formtastic', 'application'
     /[if IE]
@@ -39,3 +40,9 @@
         .updated Last updated #{LAST_UPDATE_TIME.strftime("%d %b %Y")}
         
         .host This website is hosted by <a href="http://www.dreamhost.com/r.cgi?338167">Dreamhost</a>
+        
+        
+    / 
+      Scripts are placed down here so the poge appears to load faster
+      Make sure ony code that requires prototype or scriptaculous is called onLoad or after
+

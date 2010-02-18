@@ -6,13 +6,13 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %meta{:name => :language, :content => :en}/
     %meta{:name => :revised, :content => LAST_UPDATE_TIME.strftime("%d/%m/%Y")}/
-    
+
     %script{:src => "http://www.google.com/jsapi"}
     :javascript
       google.load("prototype", "1.6.0.3"); 
       google.load("scriptaculous", "1.8.3");
       var AUTH_TOKEN = '#{form_authenticity_token}';
-    = javascript_include_tag :all
+    %script{:src => "/javascripts/application.js"}
     
     = stylesheet_link_tag 'formtastic', 'application', 'admin'
     /[if IE]
@@ -57,3 +57,7 @@
           :textile 
             This administrative interface was designed to work with standards-compliant browsers such as "Google&nbsp;Chrome":http://www.google.com/chrome, "Mozilla&nbsp;Firefox":http://www.mozilla.com/firefox/, "Opera":http://www.opera.com/, and "Apple&nbsp;Safari":http://www.apple.com/safari/. *Internet&nbsp;Explorer* has multiple known problems rendering standards-compliant webpages. If you are experiencing problems with this website using *Internet&nbsp;Explorer*, you may consider updating your web browsing experience by installing one of the browsers listed. The #{mail_to("webmaster@mgshparty.com", "webmaster", :subject => "MGSHParty.com")} of this site will gladly provide you assistance with this, should you require it.
             
+    / 
+      Scripts are placed down here so the poge appears to load faster
+      Make sure ony code that requires prototype or scriptaculous is called onLoad or after
+
