@@ -7,7 +7,7 @@ namespace :db do
       agent.user_agent_alias = 'Mac Safari'
     }  
     page = a.get('http://zip4.usps.com/zip4/company_zip.jsp')
-    for business in Business.all
+    for business in Business.not_responded.all(:conditions => "mailing_required = true")
       a.transact do
         search_result = page.form_with(:name => 'form1') do |search|
           search.firmname = business.name
@@ -23,7 +23,7 @@ namespace :db do
         address = full_td_element + first_of_multiple_tds
         address_match = /(\w[\w\ ]+\w)[\n\r\t]+([\w\ ]+)[\302\240\ ]+(\w{2})[\302\240\ \n\t\r]+(\d{5}-\d{4})/.match address
         if address_match 
-          puts [business.name, business.contact_name, business.contact_department].push(address_match[1..4]).flatten.join ','
+          puts [business.name, business.contact_name, business.contact_department].push(address_match[1..4]).flatten.join "\t"
         else
           puts "error on business #{business.id}: #{address}"
         end

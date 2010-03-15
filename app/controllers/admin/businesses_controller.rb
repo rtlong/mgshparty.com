@@ -91,7 +91,7 @@ class Admin::BusinessesController < Admin::AdminController
       format.js do
         render :update do |page|
           page.remove "business_#{@business.id}"  
-          page.alert "Removed business by the name of '#{@business.display_name}'"
+          #page.alert "Removed business by the name of '#{@business.display_name}'"
           page.call :set_totals
           
         end   
