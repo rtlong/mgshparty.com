@@ -5,6 +5,10 @@ class Admin::ContributionsController < Admin::AdminController
     @contributions = Contribution.all :include => :business, :order => 'created_at DESC'
   end
 
+  def unthanked
+    @contributions = Contribution.unthanked.all :include => :business, :order => 'created_at DESC'
+  end
+
   def show
     @actions.push ["Edit", {:action => 'edit'}]
     

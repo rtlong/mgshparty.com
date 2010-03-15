@@ -1,23 +1,13 @@
-- title "Contributions"
+- title "Unthanked Contributions"
 
-%table
-  %thead
-    %tr
-      %th Nature
-      %th Value
-      %th Business
-      %th Delivery
-      %th Received?
-      %th Date Responded
-  %tfoot
-    %tr
-      %th{:colspan => 6} #{@contributions.count} Contributions
-  %tbody
+%h2 #{@contributions.count} Contributions
+
     - for contribution in @contributions
-      %tr[contribution]{:class => cycle('a','b')}
+      .contribution
+        %td= link_to contribution.business.name, admin_business_path(contribution.business)
         %td= link_to contribution.nature, admin_business_contribution_path(contribution.business)
         %td= contribution.value
-        %td= link_to contribution.business.name, admin_business_path(contribution.business)
+        
         %td.delivery<
           %span.method>= contribution.delivery_method.to_s.humanize
           - if contribution.delivery_details?

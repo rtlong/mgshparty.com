@@ -14,13 +14,15 @@ class Contribution < ActiveRecord::Base
   validates_presence_of :delivery_details, :message => "Please explain the details of how we will get the contribution", :if => Proc.new { |c| c.delivery_method == :other }
   
   named_scope :received, :condition => 'received_at IS NOT NULL'
+  named_scope :unthanked, :condition => 'thanked_at IS NULL'
   
   def received
     !!self[:received_at]
   end
-#  def received_at=(date)
-#    self[:received_at] = @received ? date : nil
-#  end
+  
+  def thanked?
+    !!self[:thanked_at]
+  end
                   
   def delivery_method
     if self[:delivery_method] then
