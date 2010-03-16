@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216221318) do
+ActiveRecord::Schema.define(:version => 20100315224709) do
 
   create_table "business_types", :force => true do |t|
     t.string   "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20100216221318) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "received_at"
+    t.datetime "thanked_at"
   end
 
   add_index "contributions", ["business_id"], :name => "contributions_businesses_fkey"

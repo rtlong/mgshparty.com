@@ -1,12 +1,12 @@
 class Admin::ContributionsController < Admin::AdminController
   before_filter :set_actions
-  before_filter :get_business, :except => :index
+  before_filter :get_business, :except => [:index, :unthanked]
   def index
     @contributions = Contribution.all :include => :business, :order => 'created_at DESC'
   end
 
   def unthanked
-    @contributions = Contribution.unthanked.all :include => :business, :order => 'created_at DESC'
+    @contributions = Contribution.unthanked :include => :business, :order => 'created_at DESC'
   end
 
   def show

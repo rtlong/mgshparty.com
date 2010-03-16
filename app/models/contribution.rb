@@ -13,8 +13,8 @@ class Contribution < ActiveRecord::Base
   validates_presence_of :nature, :value, :delivery_method, :business_id, :message => "Required"
   validates_presence_of :delivery_details, :message => "Please explain the details of how we will get the contribution", :if => Proc.new { |c| c.delivery_method == :other }
   
-  named_scope :received, :condition => 'received_at IS NOT NULL'
-  named_scope :unthanked, :condition => 'thanked_at IS NULL'
+  named_scope :received, :conditions => 'received_at IS NOT NULL'
+  named_scope :unthanked, :conditions => 'thanked_at IS NULL'
   
   def received
     !!self[:received_at]
