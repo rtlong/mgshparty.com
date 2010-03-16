@@ -91,6 +91,22 @@ class Admin::ContributionsController < Admin::AdminController
       redirect_to :action => :show
     end
   end
+  
+  def mark_thanked
+    @contribution = @business.contribution
+    @contribution.update_attribute :thanked_at, Time.now
+    
+    if request.xhr?
+      respond_to do |format|
+        format.html do
+          render :text => "Y"
+        end
+        format.js
+      end
+    else
+      redirect_to :action => :show
+    end    
+  end
 
   protected
   

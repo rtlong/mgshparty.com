@@ -1,0 +1,8 @@
+page << <<END
+if(el = $$('#contribution_#{@contribution.id} td.thanked').first()){
+  el.update('Y');
+}
+if(el = $('thanked_at')){
+  el.update('This business was thanked today');
+}
+END

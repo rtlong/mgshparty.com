@@ -9,6 +9,8 @@
       %th Delivery
       %th Received?
       %th Date Responded
+      %th.centered{:width => '1%'}
+        %abbr{:title => "Thank you sent"} T
   %tfoot
     %tr
       %th{:colspan => 6} #{@contributions.count} Contributions
@@ -28,3 +30,10 @@
           - else
             = link_to_remote "set", :url => {:action => :mark_received, :business_id => contribution.business.id}
         %td= contribution.created_at.strftime("%d %b %Y")
+        %td.thanked
+          - if contribution.thanked? 
+            Y
+          - else
+            = link_to_remote "N", :url => { :action => :mark_thanked, :business_id => contribution.business.id }
+        
+

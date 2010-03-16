@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :contributions, :only => :index, :collection => [:unthanked]
     admin.resources :businesses do |business|
-      business.resource :contribution, :member => {:mark_received => [:post, :get]}
+      business.resource :contribution, :member => {:mark_received => [:post, :get], :mark_thanked => [:post, :get]}
     end
     admin.resources :business_types
     
