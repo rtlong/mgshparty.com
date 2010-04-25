@@ -17,4 +17,4 @@
       A thank-you was sent #{time_ago_in_words(contribution.thanked_at)}
     - else
       A thank-you still needs to be sent.
-      = link_to_remote "Mark as thanked today.", :url => { :action => :mark_thanked, :business_id => contribution.business.id }
+      = link_to_remote "Mark as thanked today.", :url => mark_thanked_admin_business_contribution_path(contribution.business.id)
