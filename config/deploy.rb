@@ -22,7 +22,7 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
     # Request the page in order to initialize the restart
-    `wget "http://mgshparty.com"`
+    `wget "http://mgshparty.com" -O-`
   end
   
   [:start, :stop].each do |t|

@@ -17,12 +17,12 @@ class Admin::ContributionsController < Admin::AdminController
     
     respond_to do |wants|
       wants.csv do
-
+        csv_data_matrix = []
         # Headers
-        csv_data_matrix = ['Business', 'Contribution Nature', 'Contribution Value', 'Liquid Value?']
+        csv_data_matrix << ['Business', 'Contribution Nature', 'Contribution Value', 'Liquid Value?']
         # Data
         @contributions.each do |c|
-          csv_data_matrix << [c.business.name, c.nature, c.value.to_f, (/cash|check/i === c.nature).to_s]
+          csv_data_matrix << [c.business.name, c.nature, c.value.to_f.to_s, (/cash|check/i === c.nature).to_s]
         end
         
         # allot for Ruby1.8 on DH servers
@@ -44,7 +44,7 @@ class Admin::ContributionsController < Admin::AdminController
         end
         
         # send it to the browser
-        send_data csv_string, :type => 'text/csv; charset=utf-8; header=present', :disposition => "attachment; filename=ANP.contributions_summary.csv"
+        send_data csv_string, :type => 'text/csv; charset=utf8; header=present', :disposition => "attachment", :filename => "ANP.contributions_summary.csv"
       end
     end
   end
