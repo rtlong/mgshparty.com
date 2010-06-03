@@ -17,17 +17,33 @@ class Admin::ContributionsController < Admin::AdminController
     
     respond_to do |wants|
       wants.csv do
-        csv_string = CSV.generate{ |csv|
-          # header row
-          csv << %w[name contribution_nature contribution_value liquid_value?]
 
-          # data rows
-          @contributions.each do |contribution|
-            csv << [contribution.business.name, contribution.nature, contribution.value.to_f, (/cash|check/i === contribution.nature).to_s]
+        # Headers
+        csv_data_matrix = ['Business', 'Contribution Nature', 'Contribution Value', 'Liquid Value?']
+        # Data
+        @contributions.each do |c|
+          csv_data_matrix << [c.business.name, c.nature, c.value.to_f, (/cash|check/i === c.nature).to_s]
+        end
+        
+        # allot for Ruby1.8 on DH servers
+        if CSV.const_defined? :Reader    # use old CSV code here…
+          csv_string = StringIO.new
+          CSV::Writer.generate(csv_string, ',') do |csv|
+            csv_data_matrix.each do |c|
+              csv << c
+            end
           end
-        }
-
-        # send it to the browsah
+          csv_string.rewind
+          csv_string = csv_string.read
+        else # use FasterCSV style code, but with CSV class, here…
+          csv_string = CSV.generate{ |csv|
+            csv_data_matrix.each do |c|
+              csv << c
+            end
+          }
+        end
+        
+        # send it to the browser
         send_data csv_string, :type => 'text/csv; charset=utf-8; header=present', :disposition => "attachment; filename=ANP.contributions_summary.csv"
       end
     end
