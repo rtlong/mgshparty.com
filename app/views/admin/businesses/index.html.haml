@@ -11,36 +11,36 @@
         = link_to "[reset]", admin_businesses_path
 
 - form_tag nil, :id => :businesses do
-  .responded_businesses
-    %h2
-      Responded
-      - unless @responded_businesses.empty?
-        .note #{@responded_businesses.count} businesses
-    - if @responded_businesses.empty?
-      .no-results There are no businesses that have responded and match your filter.
+  .businesses
+    - if @businesses.empty?
+      .no-results There are no businesses that match your filter.
     - else
-      .note These are the businesses that actually responded using the website AND businesses that have a contribution filed. If their response was added via this interface, they will not appear here unless a contribution was added as well.
       %table
         %thead
+          %tr 
+            %th.centered{ :colspan => 3 } Business
+            %th.centered{ :colspan => 3 } Contribution
           %tr
             %th.centered{:width => '1%'}
               %abbr{:title => "Needs to be mailed"} M
             %th{:width => '25%'} Name
             %th{:width => '25%'} Location
-            %th{:width => '15%'} Date Responded
-            %th{:width => '*'} Contribution
+            %th{:width => '15%'} Date
+            %th{:width => '*'} Nature
             %th{:width => '15%'} Date Received
         %tfoot
           %tr
-            %th#responded_businesses_count{:colspan => 6}= pluralize(@responded_businesses.count, 'business')
+            %th#businesses_count{:colspan => 6}= pluralize(@businesses.count, 'business')
         %tbody
-          - @responded_businesses.each_with_index do |business, i| 
+          - @businesses.each_with_index do |business, i| 
             %tr[business]{:class => ('a' if i.even?)}
               %td= business.mailing_required ? 'Y':'N'
               %td= h business.display_name
               %td
                 %a{:href => "/admin/businesses/#{business.id}"}= business.street
-              %td= time_ago_in_words(business.responded_at)
+              %td
+                - if business.contribution
+                  = time_ago_in_words(business.contribution.created_at)
               %td
                 - if business.contribution
                   = link_to( business.contribution.nature, admin_business_contribution_path(business) )
@@ -48,31 +48,6 @@
                 - if business.contribution and business.contribution.received
                   = business.contribution.received_at.to_words
               
-  .other_businesses            
-    %h2
-      Not Responded
-      - unless @other_businesses.empty?
-        .note #{@other_businesses.count} businesses
-    - if @other_businesses.empty?
-      .no-results There are no businesses that have not responded and match your filter.
-    - else
-      %table
-        %thead
-          %tr
-            %th.centered{:width => '1%'}
-              %abbr{:title => "Needs to be mailed"} M
-            %th{:width => '25%'} Name
-            %th{:width => '*'} Location
-        %tfoot
-          %tr
-            %th#other_businesses_count{:colspan => 3}= pluralize(@other_businesses.count, 'business')
-        %tbody
-          - @other_businesses.each_with_index do |business, i|
-            %tr[business]{:class => ('a' if i.even?)}
-              %td= business.mailing_required ? 'Y':'N'
-              %td= h business.display_name
-              %td
-                %a{:href => "/admin/businesses/#{business.id}"}= business.street
 
 :javascript
   // Grab all table rows and add the controls

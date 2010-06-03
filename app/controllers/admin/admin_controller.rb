@@ -5,7 +5,8 @@ class Admin::AdminController < ApplicationController
   
   def set_actions
     @actions = [
-      ["View All", {:action => 'index'}]]
+      ["View All", {:action => 'index'}]
+    ]
   end
 
 end

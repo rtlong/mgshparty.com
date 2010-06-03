@@ -5,24 +5,37 @@ class Admin::ContributionsController < Admin::AdminController
   before_filter :get_business, :except => [:index, :unthanked, :summary]
   
   def index
+    @actions.push ["Printable Summary", {:action => 'summary'}]
+    @actions.push ["Unthanked", {:action => 'unthanked'}]
+    
     @contributions = Contribution.all :include => :business, :order => 'created_at DESC'
   end
 
   def unthanked
-    @contributions = Contribution.unthanked :include => :business, :order => 'created_at DESC'
+    @contributions = Contribution.unthanked.all :include => :business, :order => 'created_at DESC'
   end
   
   def summary
     @contributions = Contribution.all( :include => :business ).sort{|a,b| a.business.name <=> b.business.name}
     
+    @headers = ['Business', 'Contribution Nature', 'Contribution Value']
+    
+    @total_value = DollarValue.new( @contributions.sum{|c| c.value.to_f } ).to_s
+    @total_liquid_value = DollarValue.new( @contributions.sum{|c| c.liquid_value? ? c.value.to_f : 0.0 } ).to_s
+    
+    flash[:notice] = "For best results, print this using Firefox"
+    
     respond_to do |wants|
+      wants.html do
+        # render template
+      end
       wants.csv do
         csv_data_matrix = []
         # Headers
-        csv_data_matrix << ['Business', 'Contribution Nature', 'Contribution Value', 'Liquid Value?']
+        csv_data_matrix << (@headers.push 'Liquid Value?')
         # Data
         @contributions.each do |c|
-          csv_data_matrix << [c.business.name, c.nature, c.value.to_f.to_s, (/cash|check/i === c.nature).to_s]
+          csv_data_matrix << [c.business.name, c.nature, c.value.to_f.to_s]
         end
         
         # allot for Ruby1.8 on DH servers
@@ -73,7 +86,7 @@ class Admin::ContributionsController < Admin::AdminController
     
     @contribution = @business.build_contribution(params[:contribution])
     if @contribution.save
-      @business.update_attributes :responded_at => Time.now
+      #@business.update_attributes :responded_at => Time.now
       flash[:notice] = "Successfully added contribution."
       redirect_to admin_business_contribution_path(@business)
     else
@@ -97,8 +110,8 @@ class Admin::ContributionsController < Admin::AdminController
     params['contribution'].delete 'received'
     
     success = @contribution.update_attributes(params[:contribution])
-    @business.responded_at ||= Time.now
-    @business.save
+    #@business.responded_at ||= Time.now
+    #@business.save
     if success
       flash[:notice] = "Successfully updated contribution."
     else

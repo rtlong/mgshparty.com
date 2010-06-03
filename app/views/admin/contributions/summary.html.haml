@@ -1,0 +1,28 @@
+- title "Contributions Summary"
+
+
+Retrieved #{Time.now.strftime("%a %d %B %Y @ %I:%M %p")}
+
+%table#contributions_summary
+  %thead
+    %tr
+      - @headers.each do |header|
+        %th= header
+        
+  %tfoot
+    %tr
+      %th.right{ :colspan => 2 } Total Value
+      %th.right= @total_value
+    %tr
+      %th.right{ :colspan => 2 } Total Liquid Value
+      %th.right= @total_liquid_value
+      
+  %tbody
+    - @contributions.each do |c|
+      %tr{:class => cycle('a','b')}
+        %td= c.business.name
+        %td= c.nature
+        %td.right= c.value.to_s
+        
+        
+      

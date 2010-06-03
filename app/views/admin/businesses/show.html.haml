@@ -3,9 +3,10 @@
 .business
   = render :partial => 'businesses/display', :locals => {:business => @business}
 
-  - if @business.responded_at
-    .responded_at
-      %h3 Responded #{time_ago_in_words(@business.responded_at)}
+  -#
+    - if @business.responded_at
+      .responded_at
+        %h3 Responded #{time_ago_in_words(@business.responded_at)}
 
 .contribution  
   - if @contribution

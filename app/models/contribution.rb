@@ -49,4 +49,8 @@ class Contribution < ActiveRecord::Base
     received_at?
   end
   
+  def liquid_value?
+    /cash|check/i === nature
+  end
+  
 end

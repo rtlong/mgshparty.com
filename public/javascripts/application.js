@@ -24,7 +24,14 @@ function update_business(element, value){
 function delete_business(event) {
   conf = confirm("Are you sure? This business and its contribution, if it has one, will be destroyed.")
   if(conf){
-    business_id = event.srcElement.parentNode.parentNode.id.split("_")[1];
+    
+    if(event.target){
+      eventTarget = event.target;
+    } else {
+      eventTarget = event.srcElement;
+    }
+    business_id = eventTarget.parentNode.parentNode.id.split("_")[1];  
+    
     new Ajax.Request(
       '/admin/businesses/' + business_id + ".js", { 
           asynchronous: true,
@@ -37,13 +44,9 @@ function delete_business(event) {
 }
 
 function set_totals(){
-  var responded_businesses_count_td = $("responded_businesses_count");
-  var other_businesses_count_td = $("other_businesses_count");
-  if(responded_businesses_count_td){
-    responded_businesses_count_td.innerHTML = responded_businesses_count_td.up('tfoot').next('tbody').select('tr').length + ' businesses';
-  }
-  if(other_businesses_count_td){
-    other_businesses_count.innerHTML = other_businesses_count_td.up('tfoot').next('tbody').select('tr').length + ' businesses';
+  var businesses_count_td = $("businesses_count");
+  if(businesses_count_td){
+    businesses_count_td.innerHTML = businesses_count_td.up('tfoot').next('tbody').select('tr').length + ' businesses';
   }
 }
 
