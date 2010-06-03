@@ -2,7 +2,7 @@ require 'csv'
 
 class Admin::ContributionsController < Admin::AdminController
   before_filter :set_actions
-  before_filter :get_business, :except => [:index, :unthanked, :summary]
+  before_filter :get_business, :except => [:index, :unthanked]
   
   def index
     @contributions = Contribution.all :include => :business, :order => 'created_at DESC'

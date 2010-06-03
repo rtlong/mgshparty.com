@@ -1,5 +1,5 @@
 class Admin::AdminController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required, :except => [:summary]
   before_filter :set_actions
   
   
