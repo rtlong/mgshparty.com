@@ -1,5 +1,5 @@
 # this line is required for DH local gems to work
-ENV['GEM_PATH'] = '/home/me2000r/.gems:/usr/lib/ruby/gems/1.8' 
+#ENV['GEM_PATH'] = '/home/me2000r/.gems:/usr/lib/ruby/gems/1.8' 
 
 # Be sure to restart your server when you modify this file
 

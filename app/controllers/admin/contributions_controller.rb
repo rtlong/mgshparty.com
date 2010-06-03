@@ -1,12 +1,36 @@
+require 'csv'
+
 class Admin::ContributionsController < Admin::AdminController
   before_filter :set_actions
-  before_filter :get_business, :except => [:index, :unthanked]
+  before_filter :get_business, :except => [:index, :unthanked, :summary]
+  
   def index
     @contributions = Contribution.all :include => :business, :order => 'created_at DESC'
   end
 
   def unthanked
     @contributions = Contribution.unthanked :include => :business, :order => 'created_at DESC'
+  end
+  
+  def summary
+    @contributions = Contribution.all( :include => :business ).sort{|a,b| a.business.name <=> b.business.name}
+    
+    respond_to do |wants|
+      wants.csv do
+        csv_string = CSV.generate{ |csv|
+          # header row
+          csv << %w[name contribution_nature contribution_value liquid_value?]
+
+          # data rows
+          @contributions.each do |contribution|
+            csv << [contribution.business.name, contribution.nature, contribution.value.to_f, (/cash|check/i === contribution.nature).to_s]
+          end
+        }
+
+        # send it to the browsah
+        send_data csv_string, :type => 'text/csv; charset=utf-8; header=present', :disposition => "attachment; filename=ANP.contributions_summary.csv"
+      end
+    end
   end
 
   def show
