@@ -6,8 +6,8 @@ class Admin::BusinessesController < Admin::AdminController
     @actions.push ["Download", {:action => 'index', :format => 'csv'}]
     respond_to do |format|
       format.html do
-        @responded_businesses = Business.responded.full_search(params[:q]).all(:include => :contribution, :order => 'responded_at DESC')
-        @other_businesses = Business.not_responded.full_search(params[:q]).all
+        @businesses = Business.full_search(params[:q]).all(:include => :contribution, :order => 'name ASC')
+        #@other_businesses = Business.not_responded.full_search(params[:q]).all
       end
 
       format.csv do

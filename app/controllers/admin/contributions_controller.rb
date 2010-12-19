@@ -1,12 +1,65 @@
+require 'csv'
+
 class Admin::ContributionsController < Admin::AdminController
   before_filter :set_actions
-  before_filter :get_business, :except => [:index, :unthanked]
+  before_filter :get_business, :except => [:index, :unthanked, :summary]
+  
   def index
+    @actions.push ["Printable Summary", {:action => 'summary'}]
+    @actions.push ["Unthanked", {:action => 'unthanked'}]
+    
     @contributions = Contribution.all :include => :business, :order => 'created_at DESC'
   end
 
   def unthanked
-    @contributions = Contribution.unthanked :include => :business, :order => 'created_at DESC'
+    @contributions = Contribution.unthanked.all :include => :business, :order => 'created_at DESC'
+  end
+  
+  def summary
+    @contributions = Contribution.all( :include => :business ).sort{|a,b| a.business.name <=> b.business.name}
+    
+    @headers = ['Business', 'Contribution Nature', 'Contribution Value']
+    
+    @total_value = DollarValue.new( @contributions.sum{|c| c.value.to_f } ).to_s
+    @total_liquid_value = DollarValue.new( @contributions.sum{|c| c.liquid_value? ? c.value.to_f : 0.0 } ).to_s
+    
+    flash[:notice] = "For best results, print this using Firefox"
+    
+    respond_to do |wants|
+      wants.html do
+        # render template
+      end
+      wants.csv do
+        csv_data_matrix = []
+        # Headers
+        csv_data_matrix << (@headers.push 'Liquid Value?')
+        # Data
+        @contributions.each do |c|
+          csv_data_matrix << [c.business.name, c.nature, c.value.to_f.to_s]
+        end
+        
+        # allot for Ruby1.8 on DH servers
+        if CSV.const_defined? :Reader    # use old CSV code here…
+          csv_string = StringIO.new
+          CSV::Writer.generate(csv_string, ',') do |csv|
+            csv_data_matrix.each do |c|
+              csv << c
+            end
+          end
+          csv_string.rewind
+          csv_string = csv_string.read
+        else # use FasterCSV style code, but with CSV class, here…
+          csv_string = CSV.generate{ |csv|
+            csv_data_matrix.each do |c|
+              csv << c
+            end
+          }
+        end
+        
+        # send it to the browser
+        send_data csv_string, :type => 'text/csv; charset=utf8; header=present', :disposition => "attachment", :filename => "ANP.contributions_summary.csv"
+      end
+    end
   end
 
   def show
