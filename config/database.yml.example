@@ -1,0 +1,25 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  database: mgshparty
+  username: 
+  password: 
+  host: 
+  port: 3306
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+# use mysql server on Dreamhost
+production:
+  adapter: mysql
+  encoding: utf8
+  database: mgshparty
+  username: 
+  password: 
+  host: mysql.rtlong.com
+  port: 3306
+
