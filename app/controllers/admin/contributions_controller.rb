@@ -86,7 +86,7 @@ class Admin::ContributionsController < Admin::AdminController
     
     @contribution = @business.build_contribution(params[:contribution])
     if @contribution.save
-      @business.update_attributes :responded_at => Time.now
+      #@business.update_attributes :responded_at => Time.now
       flash[:notice] = "Successfully added contribution."
       redirect_to admin_business_contribution_path(@business)
     else
@@ -110,8 +110,8 @@ class Admin::ContributionsController < Admin::AdminController
     params['contribution'].delete 'received'
     
     success = @contribution.update_attributes(params[:contribution])
-    @business.responded_at ||= Time.now
-    @business.save
+    #@business.responded_at ||= Time.now
+    #@business.save
     if success
       flash[:notice] = "Successfully updated contribution."
     else

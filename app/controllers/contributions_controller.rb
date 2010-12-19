@@ -1,4 +1,5 @@
 class ContributionsController < ApplicationController
+
   def show
     @business = Business.find params[:business_id]
     @contribution = @business.contribution

@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.signup '1198c38a11dbdf935af35342d959fb24ca07cecc', :controller => 'users', :action => 'new'
     admin.logout 'logout', :controller => 'sessions', :action => 'destroy'
     admin.login 'login', :controller => 'sessions', :action => 'new'
-    admin.root :controller => 'businesses', :action => 'index'
+    admin.root :controller => 'contributions', :action => 'index'
   end
 
   map.resources :businesses, :except => :show, :collection => {:search => [:get,:post]}, :new => {:new => :post} do |business|

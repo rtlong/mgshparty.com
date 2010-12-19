@@ -62,8 +62,8 @@ class Business < ActiveRecord::Base
     end
   }
   
-  named_scope :responded, :conditions => 'responded_at IS NOT NULL'
-  named_scope :not_responded, :conditions => 'responded_at IS NULL'
+  #named_scope :responded, :conditions => 'responded_at IS NOT NULL'
+  #named_scope :not_responded, :conditions => 'responded_at IS NULL'
   
   def phone=(phone)
     # If two extensions are provided, only the first is stored

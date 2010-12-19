@@ -32,7 +32,7 @@ class BusinessesController < ApplicationController
   
   def create
     @business = Business.new(params[:business])
-    @business.responded_at = Time.now
+    #@business.responded_at = Time.now
     if @business.save
       flash[:notice] = "Successfully added business info."
       redirect_to new_business_contribution_path(@business)
@@ -55,7 +55,7 @@ class BusinessesController < ApplicationController
   
   def update
     @business = Business.find(params[:id])
-    @business.responded_at ||= Time.now
+    #@business.responded_at ||= Time.now
     @business.save
     if @business.update_attributes(params[:business])
       flash[:notice] = "Successfully updated business info."

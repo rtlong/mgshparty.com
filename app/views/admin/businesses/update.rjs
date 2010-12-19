@@ -1,17 +1,10 @@
 row_id = "business_#{@business.id}"
 
-#page.visual_effect :highlight, row_id, :startcolor => "#19ff19"
 if @business.mailing_required
   page << "$('#{row_id}').firstDescendant().addClassName('hi');"
 else
   page << "$('#{row_id}').firstDescendant().removeClassName('hi');"
 end 
 
-#flash.each do |name, msg|
-#  page << %div{:id => "flash_#{name}"}= msg
-#end
 flash.clear
 
-#if @business.errors
-#  page << "console.debug('Errors on saving business: #{@business.errors.full_messages.join(" ")}');"
-#end
