@@ -1,6 +1,6 @@
 # Settings specified here will take precedence over those in config/environment.rb
 
-ENV['GEM_PATH'] = '/home/me2000r/.gems' + ':/usr/lib/ruby/gems/1.8'
+#ENV['GEM_PATH'] = '/home/me2000r/.gems' + ':/usr/lib/ruby/gems/1.8'
 
 # The production environment is meant for finished, "live" apps.
 # Code is not reloaded between requests
